@@ -17,6 +17,12 @@
       var data = event.target.result;
       try {
         data = JSON.parse(data);
+        // TODO: Fixme.
+        var scope = angular.element("body").scope();
+        console.log(scope);
+        scope.$apply(function() {
+          scope.updateHar(data);
+        });
       }
       catch(e) {
         alert(e);

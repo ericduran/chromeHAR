@@ -144,8 +144,8 @@
                         <td class="timeline-column">
                           <div class="network-graph-side network-type-{{entry.name}}">
                             <div class="network-graph-bar-area">
-                              <div class="network-graph-bar waiting" style="left: {{(entry.request.startTime - startedTime)/pageTimings.onLoad * 100}}%; right: {{100.0 - ((entry.request.startTime - startedTime + (entry._entry.time - entry.timings.receive ) )/pageTimings.onLoad * 100)}}%; " title=""></div>
-                              <div class="network-graph-bar" style=" left: {{(entry.request.startTime - startedTime + (entry._entry.time - entry.timings.receive ) )/pageTimings.onLoad * 100}}%;  right: {{100.0 - ((entry.request.startTime - startedTime + (entry._entry.time - entry.timings.receive ) )/pageTimings.onLoad * 100)}}%;" title=""></div>
+                              <div class="network-graph-bar waiting" style="left: {{entry.graphs.latency_left}}%; right: {{entry.graphs.latency_right}}%;" title=""></div>
+                              <div class="network-graph-bar" style="left: {{entry.graphs.receiving_left}}%;  right: {{100.0 - ((entry.request.startTime - startedTime + (entry._entry.time - entry.timings.receive ) )/pageTimings.onLoad * 100)}}%;" title=""></div>
                               <div class="network-graph-label waiting" title="">{{entry.latency}}</div>
                               <div class="network-graph-label after" title="">{{entry.receiveTime}}</div>
                             </div>

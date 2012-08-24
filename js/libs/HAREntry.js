@@ -2,7 +2,7 @@
 // See http://groups.google.com/group/http-archive-specification/web/har-1-2-spec
 // for HAR specification.
 
-HAREntry = function(entry, id) {
+HAREntry = function(entry, id, data) {
   this._entry = entry;
   this._id = id;
 
@@ -42,6 +42,10 @@ HAREntry = function(entry, id) {
   this.request = this.prepRequest();
   this.percentages = this.calculator.computeBarGraphPercentages(this.request);
 
+
+  // Extra from data.
+  this.startedTime = new Date(data.log.pages[0].startedDateTime).getTime();
+  this.graphs = this.graphs(data);
   // this.startedDateTime = new Date(this._request.startTime * 1000);
 }
 
@@ -110,6 +114,19 @@ HAREntry.prototype = {
     this.boundarySpan = 100;
     this.diff = request.endTime - request.responseReceivedTime;
     return request;
+  },
+
+  graphs: function (data) {
+    var graph = {};
+    graph.pOL = data.log.pages[0].pageTimings.onLoad;
+    graph.lOR = this.request.startTime - this.startedTime;
+    graph.Lat = this._entry.time - this.receive;
+    graph.end = this._entry.time + this.receive;
+    graph.latency_left = (graph.lOR  / graph.pOL) * 100;
+    graph.latency_right =  100 - (((graph.lOR + graph.Lat) / graph.pOL) * 100);
+    graph.receiving_left = ((graph.lOR + graph.Lat)  / graph.pOL) * 100;
+    graph.receiving_right = ''; // TODO: Fixme
+    return graph;
   }
 }
 
