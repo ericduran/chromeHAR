@@ -1,5 +1,5 @@
 
-function EntryListCtrl($scope, $http) {
+function NetworkCtrl($scope, $http) {
   $scope.entries = [];
   $scope.data = '';
   $scope.startedTime = '';

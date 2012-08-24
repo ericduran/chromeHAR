@@ -21,11 +21,11 @@
 
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body class="detached" ng-controller="EntryListCtrl">
+<body class="detached" ng-controller="NetworkCtrl">
   <div id="dropArea" class="visible">
     <h2 class="support"><span>Drag and <em>Drop</em> HARs here</span></h2>
   </div>
-  <div id="toolbar" class="">
+  <div id="toolbar">
     <div id="toolbar-controls">
       <div class="toolbar-item" id="toolbar-search-item">
         <input id="search" type="search" incremental="" results="0" placeholder="Search Network" ng-model="query">
@@ -41,7 +41,6 @@
     </button>
   </div>
   <div id="main">
-
     <div id="main-status-bar" class="status-bar">
       <div id="anchored-status-bar-items">
         <button class="settings-status-bar-item status-bar-item" title="Settings">
@@ -73,15 +72,14 @@
             <div id="network-container" class="visible">
               <div class="data-grid network-log-grid visible filter-all" tabindex="0">
                 <table class="header">
-                  <colgroup span="8">
+                  <colgroup span="7">
                     <col style="width: 20.05610098176718%; ">
-                    <col style="width: 6.03085553997195%; ">
-                    <col style="width: 6.03085553997195%; ">
-                    <col style="width: 6.03085553997195%; ">
-                    <col style="width: 10.02805049088359%; ">
-                    <col style="width: 5.9607293127629735%; ">
-                    <col style="width: 5.9607293127629735%; ">
-                    <col style="width: 39.90182328190743%; ">
+                    <col style="width: 7.03085553997195%; ">
+                    <col style="width: 7.03085553997195%; ">
+                    <col style="width: 7.03085553997195%; ">
+                    <col style="width: 6.9607293127629735%; ">
+                    <col style="width: 6.9607293127629735%; ">
+                    <col style="width: 45.90182328190743%; ">
                   </colgroup>
                   <tbody>
                     <tr>
@@ -96,9 +94,6 @@
                       </th>
                       <th class="type-column sortable" ng-click="predicate = 'mimeType'; reverse=false">
                         <div>Type</div>
-                      </th>
-                      <th class="initiator-column">
-                        <div>Initiator</div>
                       </th>
                       <th class="size-column sortable" ng-click="predicate = 'size'; reverse=false">
                         <div>Size<div class="network-header-subtitle">Content</div></div>
@@ -123,15 +118,14 @@
 
                 <div class="data-container">
                   <table class="data">
-                    <colgroup span="8">
+                    <colgroup span="7">
                       <col style="width: 20.05610098176718%; ">
-                      <col style="width: 6.03085553997195%; ">
-                      <col style="width: 6.03085553997195%; ">
-                      <col style="width: 6.03085553997195%; ">
-                      <col style="width: 10.02805049088359%; ">
-                      <col style="width: 5.9607293127629735%; ">
-                      <col style="width: 5.9607293127629735%; ">
-                      <col style="width: 39.90182328190743%; ">
+                      <col style="width: 7.03085553997195%; ">
+                      <col style="width: 7.03085553997195%; ">
+                      <col style="width: 7.03085553997195%; ">
+                      <col style="width: 6.9607293127629735%; ">
+                      <col style="width: 6.9607293127629735%; ">
+                      <col style="width: 45.90182328190743%; ">
                     </colgroup>
                     <tbody>
                       <tr class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in entries | filter:query | filter:type | orderBy:predicate:reverse">
@@ -139,7 +133,6 @@
                         <td class="method-column"><div title="{{entry.method}}">{{entry.method}}</div></td>
                         <td class="status-column"><div title="{{entry.status}} {{entry.statusText}}">{{entry.status}}<div class="network-cell-subtitle">{{entry.statusText}}</div></div></td>
                         <td class="type-column"><div title="{{entry.mimeType}}">{{entry.mimeType}}</div></td>
-                        <td class="initiator-column"><div title="http://example.com/index.html:185"><a href="http://example.com/index.html" class="webkit-html-resource-link" title="http://example.com/index.html" style="max-width: 100%; ">index.html:185</a><div class="network-cell-subtitle">Parser</div></div></td>
                         <td class="size-column"><div title="{{entry.size}}">{{entry.size}}<div class="network-cell-subtitle">{{entry.contentSize}}</div></div></td>
                         <td class="time-column"><div title="{{entry.time}}">{{entry.time}}<div class="network-cell-subtitle">{{entry.latency}}</div></div></td>
                         <td class="timeline-column">
@@ -166,7 +159,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="network-timeline-grid" style="left: 60%; right: 18px; ">
+                <div class="network-timeline-grid">
                   <div id="resources-graphs"></div>
                     <div class="resources-dividers">
                       <div class="resources-divider first" style="left: 8.333333333333338%"></div>
