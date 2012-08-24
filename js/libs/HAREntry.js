@@ -19,6 +19,7 @@ HAREntry = function(entry, id, data) {
 
   // Custom
   this.parsedURL = new WebInspector.ParsedURL(entry.request.url);
+  this.nameFilter = this.parsedURL.lastPathComponent
   this.name = this.getRequestName();
   this.folder = this.getFolder();
   this.size = this.getSize();

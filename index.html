@@ -3,9 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>HAR Viewer</title>
+  <title>Chrome HAR Viewer</title>
   <meta name="description" content="An HTTP Archive Viewer">
-  <meta name="viewport" content="width=device-width">
 
   <!-- Required Chrome Dev Tools CSS -->
   <link rel="stylesheet" type="text/css" href="chrome/dialog.css">
@@ -15,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="chrome/popover.css">
   <link rel="stylesheet" type="text/css" href="chrome/dataGrid.css">
   <link rel="stylesheet" type="text/css" href="chrome/tabbedPane.css">
+  <link rel="stylesheet" type="text/css" href="chrome/splitView.css">
   <link rel="stylesheet" type="text/css" href="chrome/networkLogView.css">
   <link rel="stylesheet" type="text/css" href="chrome/networkPanel.css">
   <link rel="stylesheet" type="text/css" href="chrome/networkLogView.css">
@@ -69,7 +69,7 @@
     <div id="main-panels" class="visible">
       <div class="panel network visible">
         <div class="split-view visible">
-          <div class="split-view-contents split-view-sidebar-left" style="left: 0px; width: 313px; ">
+          <div class="split-view-contents split-view-sidebar-left  maximized" style="left: 0px; right: 0; ">
             <div id="network-container" class="visible">
               <div class="data-grid network-log-grid visible filter-all" tabindex="0">
                 <table class="header">
@@ -85,25 +85,25 @@
                   </colgroup>
                   <tbody>
                     <tr>
-                      <th class="name-column sortable">
+                      <th class="name-column sortable" ng-click="predicate = 'nameFilter'; reverse=false">
                         <div>Name<div class="network-header-subtitle">Path</div></div>
                       </th>
-                      <th class="method-column sortable">
+                      <th class="method-column sortable" ng-click="predicate = 'method'; reverse=false">
                         <div>Method</div>
                       </th>
-                      <th class="status-column sortable">
+                      <th class="status-column sortable" ng-click="predicate = 'status'; reverse=false">
                         <div>Status<div class="network-header-subtitle">Text</div></div>
                       </th>
-                      <th class="type-column sortable">
+                      <th class="type-column sortable" ng-click="predicate = 'mimeType'; reverse=false">
                         <div>Type</div>
                       </th>
-                      <th class="initiator-column sortable">
+                      <th class="initiator-column">
                         <div>Initiator</div>
                       </th>
-                      <th class="size-column sortable">
+                      <th class="size-column sortable" ng-click="predicate = 'size'; reverse=false">
                         <div>Size<div class="network-header-subtitle">Content</div></div>
                       </th>
-                      <th class="time-column sortable">
+                      <th class="time-column sortable" ng-click="predicate = 'time'; reverse=false">
                         <div>Time<div class="network-header-subtitle">Latency</div></div>
                       </th>
                       <th class="timeline-column sort-ascending">
@@ -134,8 +134,8 @@
                       <col style="width: 39.90182328190743%; ">
                     </colgroup>
                     <tbody>
-                      <tr class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in entries | filter:query">
-                        <td class="name-column"><div title="{{entry.url}}"><img class="icon">{{entry.parsedURL.lastPathComponent}}<div class="network-cell-subtitle">{{entry.folder}}</div></div></td>
+                      <tr class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in entries | filter:query | orderBy:predicate:reverse">
+                        <td class="name-column" ng-click="showDetails($index)"><div title="{{entry.url}}"><img class="icon">{{entry.parsedURL.lastPathComponent}}<div class="network-cell-subtitle">{{entry.folder}}</div></div></td>
                         <td class="method-column"><div title="{{entry.method}}">{{entry.method}}</div></td>
                         <td class="status-column"><div title="{{entry.status}} {{entry.statusText}}">{{entry.status}}<div class="network-cell-subtitle">{{entry.statusText}}</div></div></td>
                         <td class="type-column"><div title="{{entry.mimeType}}">{{entry.mimeType}}</div></td>
@@ -232,7 +232,7 @@
               </div>
             </div>
           </div>
-          <div id="network-views" class="split-view-contents hidden" style="right: 0px; left: 313px; ">
+          <div class="split-view-contents hidden" style="right: 0px; left: 313px; " id="network-views">
             <button id="network-close-button"></button>
             <div class="tabbed-pane network-item-view visible">
               <div class="tabbed-pane-header">

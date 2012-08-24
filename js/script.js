@@ -32,12 +32,12 @@
     return false;
   };
 
+
   // TODO: Fixme, Do with angular.
   $('.network-larger-resources-status-bar-item').click(function (e){
     $(this).toggleClass('toggled-on');
     $('.network-log-grid').toggleClass('small');
   });
-
 })(window);
 
 // Hacks to workaround issues with chrome dev tools js.

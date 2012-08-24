@@ -19,4 +19,12 @@ function EntryListCtrl($scope, $http) {
     $scope.pageTimings = data.log.pages[0].pageTimings;
     $scope.pageTimings.section = $scope.pageTimings.onLoad / 12;
   }
+
+  $scope.showDetails = function(i) {
+    var $leftView = $('.split-view-sidebar-left');
+    $('#network-views').removeClass('hidden')
+    $('.panel.network').addClass('viewing-resource');
+    $leftView.removeClass('maximized');
+    console.log(i);
+  }
 }
