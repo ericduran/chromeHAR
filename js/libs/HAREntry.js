@@ -19,7 +19,6 @@ HAREntry = function(entry, id, data) {
 
   // Custom
   this.parsedURL = new WebInspector.ParsedURL(entry.request.url);
-  this.nameFilter = this.parsedURL.lastPathComponent
   this.name = this.getRequestName();
   this.folder = this.getFolder();
   this.size = this.getSize();
@@ -36,6 +35,11 @@ HAREntry = function(entry, id, data) {
   this.startedTime = new Date(data.log.pages[0].startedDateTime).getTime();
   this.graphs = this.graphs(data);
   // this.startedDateTime = new Date(this._request.startTime * 1000);
+
+  // Raw values for Sort and Filters.
+  this.nameSort = this.parsedURL.lastPathComponent;
+  this.timeSort = this._entry.time;
+  this.sizeSort = '';
 }
 
 HAREntry.prototype = {

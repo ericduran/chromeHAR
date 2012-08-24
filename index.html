@@ -56,7 +56,7 @@
           <div class="scope-bar-divider"></div>
           <li ng-class="getClass('doc')" class="document" ng-click="type.mimeType='text/html';sI='doc'">Documents</li>
           <li ng-class="getClass('css')" class="stylesheet" ng-click="type.mimeType='text/css';sI='css'">Stylesheets</li>
-          <li ng-class="getClass('img')" class="image" ng-click="type.mimeType='image/png';sI='img'">Images</li>
+          <li ng-class="getClass('img')" class="image" ng-click="type.mimeType='image/';sI='img'">Images</li>
           <li ng-class="getClass('js')" class="script" ng-click="type.mimeType='text/javascript';sI='js'">Scripts</li>
           <li ng-class="getClass('xhr')" class="xhr" ng-click="type.mimeType='application/x-javascript';sI='xhr'">XHR</li>
           <li ng-class="getClass('fnt')" class="font" ng-click="type.mimeType='application/octet-stream';sI='fnt'">Fonts</li>
@@ -83,7 +83,7 @@
                   </colgroup>
                   <tbody>
                     <tr>
-                      <th class="name-column sortable" ng-click="predicate = 'nameFilter'; reverse=false">
+                      <th class="name-column sortable" ng-click="predicate = 'nameSort'; reverse=false">
                         <div>Name<div class="network-header-subtitle">Path</div></div>
                       </th>
                       <th class="method-column sortable" ng-click="predicate = 'method'; reverse=false">
@@ -98,7 +98,7 @@
                       <th class="size-column sortable" ng-click="predicate = 'size'; reverse=false">
                         <div>Size<div class="network-header-subtitle">Content</div></div>
                       </th>
-                      <th class="time-column sortable" ng-click="predicate = 'time'; reverse=false">
+                      <th class="time-column sortable" ng-click="predicate = 'timeSort'; reverse=false">
                         <div>Time<div class="network-header-subtitle">Latency</div></div>
                       </th>
                       <th class="timeline-column sort-ascending">
