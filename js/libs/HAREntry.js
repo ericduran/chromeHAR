@@ -79,6 +79,7 @@ HAREntry.prototype = {
   },
 
   getSize: function () {
+    // TODO: Fixme, this doesn't correctly pick up items from cache.
     if (this._entry.cached)
       return 0;
     if (this._entry.response.status === 304) // Not modified
