@@ -19,7 +19,7 @@
         data = JSON.parse(data);
         // TODO: Fixme.
         var scope = angular.element("body").scope();
-        console.log(scope);
+        $('#dropArea').removeClass('visible');
         scope.$apply(function() {
           scope.updateHar(data);
         });
@@ -32,6 +32,7 @@
     return false;
   };
 
+  // TODO: Fixme, Do with angular.
   $('.network-larger-resources-status-bar-item').click(function (e){
     $(this).toggleClass('toggled-on');
     $('.network-log-grid').toggleClass('small');
