@@ -68,7 +68,7 @@
     <div id="main-panels" class="visible">
       <div class="panel network visible">
         <div class="split-view visible">
-          <div class="split-view-contents split-view-sidebar-left  maximized" style="left: 0px; right: 0; ">
+          <div class="split-view-contents split-view-sidebar-left maximized">
             <div id="network-container" class="visible">
               <div class="data-grid network-log-grid visible filter-all" tabindex="0">
                 <table class="header">
@@ -159,7 +159,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="network-timeline-grid">
+                <div class="network-timeline-grid" ng-show="checked">
                   <div id="resources-graphs"></div>
                     <div class="resources-dividers">
                       <div class="resources-divider first" style="left: 8.333333333333338%"></div>
@@ -225,7 +225,7 @@
               </div>
             </div>
           </div>
-          <div class="split-view-contents hidden" style="right: 0px; left: 313px; " id="network-views">
+          <div class="split-view-contents split-view-network-views hidden" id="network-views">
             <button id="network-close-button"></button>
             <div class="tabbed-pane network-item-view visible">
               <div class="tabbed-pane-header">
@@ -338,7 +338,7 @@
               </div>
             </div>
           </div>
-          <div class="split-view-resizer" style="left: 310px; "></div>
+          <div class="split-view-resizer"></div>
         </div>
       </div>
     </div>
@@ -355,15 +355,18 @@
   <script src="js/script.js"></script>
 
   <!-- Required Chrome Dev Tools JS -->
+  <!--
+  // Remove after testing. These should no longer be require.
   <script src="chrome/inspector.js"></script>
   <script src="chrome/DevTools.js"></script>
   <script src="chrome/HAREntry.js"></script>
-  <script src="chrome/utilities.js"></script>
-  <script src="chrome/UIUtils.js"></script>
-  <script src="chrome/Object.js"></script>
   <script src="chrome/View.js"></script>
   <script src="chrome/Panel.js"></script>
   <script src="chrome/NetworkPanel.js"></script>
+  -->
+  <script src="chrome/utilities.js"></script>
+  <script src="chrome/Object.js"></script>
+  <script src="chrome/UIUtils.js"></script>
   <script src="chrome/ResourceUtils.js"></script>
   <script src="js/libs/HAREntry.js"></script>
   <script src="js/controllers.js"></script>

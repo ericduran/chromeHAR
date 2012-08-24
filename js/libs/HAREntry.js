@@ -27,22 +27,10 @@ HAREntry = function(entry, id, data) {
   this.time = this.getTime();
   this.latency = this.getLatency();
 
-  var timeCalculator = new WebInspector.NetworkTransferTimeCalculator();
-  var durationCalculator = new WebInspector.NetworkTransferDurationCalculator();
+  // var timeCalculator = new WebInspector.NetworkTransferTimeCalculator();
+  // var durationCalculator = new WebInspector.NetworkTransferDurationCalculator();
 
-  this._calculators = {};
-  this._calculators.timeline = timeCalculator;
-  this._calculators.startTime = timeCalculator;
-  this._calculators.endTime = timeCalculator;
-  this._calculators.responseTime = timeCalculator;
-  this._calculators.duration = durationCalculator;
-  this._calculators.latency = durationCalculator;
-  this.calculator = this._calculators.timeline;
-  this.calculator.minimumBoundary = 0;
-  this.calculator.maximumBoundary = 100;
   this.request = this.prepRequest();
-  this.percentages = this.calculator.computeBarGraphPercentages(this.request);
-
 
   // Extra from data.
   this.startedTime = new Date(data.log.pages[0].startedDateTime).getTime();

@@ -32,3 +32,18 @@
   left: 54%;
   right: 18px;
 }
+
+.split-view-network-views,
+.split-view-resizer {
+  left: 285px;
+  right: 0px;
+}
+
+.split-view-sidebar-left.maximized {
+  left: 0px;
+  right: 0;
+}
+
+#network-close-button  {
+    display: block;
+}

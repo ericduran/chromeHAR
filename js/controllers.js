@@ -5,6 +5,7 @@ function NetworkCtrl($scope, $http) {
   $scope.startedTime = '';
   $scope.pageTimings = '';
   $scope.pageTimings.section = '';
+  $scope.checked = false;
 
   $scope.updateHar = function(data) {
     var entries = data.log.entries;
@@ -14,6 +15,7 @@ function NetworkCtrl($scope, $http) {
       entries[i] = new HAREntry(entry, i, data);
     });
     $scope.entries = entries;
+    $scope.checked = true;
     $scope.data = data;
     $scope.startedTime = new Date(data.log.pages[0].startedDateTime).getTime();
     $scope.pageTimings = data.log.pages[0].pageTimings;
