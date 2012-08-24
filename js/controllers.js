@@ -8,11 +8,13 @@ function NetworkCtrl($scope, $http) {
   $scope.checked = false;
 
   $scope.updateHar = function(data) {
+    $scope.transfer = 0;
     var entries = data.log.entries;
     data.count = data.log.entries.length;
     delete data.log.entries;
     $.each(entries, function(i, entry) {
       entries[i] = new HAREntry(entry, i, data);
+      $scope.transfer += entries[i].getRawContentSize();
     });
     $scope.entries = entries;
     $scope.checked = true;
@@ -20,6 +22,7 @@ function NetworkCtrl($scope, $http) {
     $scope.startedTime = new Date(data.log.pages[0].startedDateTime).getTime();
     $scope.pageTimings = data.log.pages[0].pageTimings;
     $scope.pageTimings.section = $scope.pageTimings.onLoad / 12;
+    $scope.transfer = Number.bytesToString($scope.transfer);
   }
 
   $scope.showDetails = function(i) {

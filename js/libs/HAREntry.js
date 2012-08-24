@@ -60,12 +60,9 @@ HAREntry.prototype = {
     types['text/css'] = 'stylesheet';
     types['text/javascript'] = 'script';
     types['application/javascript'] = 'script';
-
-    if (mimeType == 'png') {
-      // TODO: Fixme
-      // See {WebInspector.NetworkRequest.populateImageSource}
-      return '';
-    }
+    types['image/png'] = 'image';
+    types['image/gif'] = 'image';
+    types['image/jpeg'] = 'image';
 
     return types[mimeType];
   },
@@ -82,6 +79,10 @@ HAREntry.prototype = {
 
   getContentSize: function () {
     return Number.bytesToString(this._entry.response.content.size);
+  },
+
+  getRawContentSize: function () {
+    return this._entry.response.content.size;
   },
 
   getTime: function () {

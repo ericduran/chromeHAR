@@ -127,6 +127,12 @@
                       <col style="width: 6.9607293127629735%; ">
                       <col style="width: 45.90182328190743%; ">
                     </colgroup>
+                    <tfoot ng-show="checked">
+                      <tr class="revealed network-summary-bar">
+                        <!-- FixMe: This always assume ms -->
+                        <td colspan="7">{{data.count}} requests  ❘  {{transfer}} transferred  ❘  <!-- TODO: Need the time here; --> (onload: {{pageTimings.onLoad}}ms, DOMContentLoaded: {{pageTimings.onContentLoad}}ms)</td>
+                      </tr>
+                    </tfoot>
                     <tbody>
                       <tr class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in entries | filter:query | filter:type | orderBy:predicate:reverse">
                         <td class="name-column" ng-click="showDetails($index)"><div title="{{entry.url}}"><img class="icon">{{entry.parsedURL.lastPathComponent}}<div class="network-cell-subtitle">{{entry.folder}}</div></div></td>
