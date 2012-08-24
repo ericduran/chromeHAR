@@ -27,4 +27,14 @@ function EntryListCtrl($scope, $http) {
     $leftView.removeClass('maximized');
     console.log(i);
   }
+
+  $scope.sI = 'all'; // Selected Index;
+  $scope.getClass = function (type) {
+    if (type == $scope.sI) {
+      return 'selected';
+    }
+    else {
+      return '';
+    }
+  }
 }
