@@ -23,6 +23,15 @@ function NetworkCtrl($scope, $http) {
     $scope.pageTimings = data.log.pages[0].pageTimings;
     $scope.pageTimings.section = $scope.pageTimings.onLoad / 12;
     $scope.transfer = Number.bytesToString($scope.transfer);
+    $scope.labels = $scope.setLabels($scope.pageTimings.section);
+  }
+
+  $scope.setLabels = function(section) {
+    var labels = {};
+    for (var i = 12; i > 0; i--) {
+      labels[i] = String.sprintf("%0.00fms", section * i);
+    };
+    return labels;
   }
 
   $scope.showDetails = function(i) {
