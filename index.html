@@ -74,7 +74,7 @@
               <div class="data-grid network-log-grid visible filter-all" tabindex="0">
                 <table class="header">
                   <colgroup span="7">
-                    <col style="width: 20.05610098176718%; ">
+                    <col class="first" style="width: 20.05610098176718%; ">
                     <col style="width: 7.03085553997195%; ">
                     <col style="width: 7.03085553997195%; ">
                     <col style="width: 7.03085553997195%; ">
@@ -120,7 +120,7 @@
                 <div class="data-container">
                   <table class="data">
                     <colgroup span="7">
-                      <col style="width: 20.05610098176718%; ">
+                      <col class="first" style="width: 20.05610098176718%; ">
                       <col style="width: 7.03085553997195%; ">
                       <col style="width: 7.03085553997195%; ">
                       <col style="width: 7.03085553997195%; ">
@@ -233,114 +233,188 @@
             </div>
           </div>
           <div class="split-view-contents split-view-network-views hidden" id="network-views">
-            <button id="network-close-button"></button>
+            <button id="network-close-button" ng-click="hideDetails()"></button>
             <div class="tabbed-pane network-item-view visible">
               <div class="tabbed-pane-header">
                 <div class="tabbed-pane-header-contents">
                   <div class="tabbed-pane-header-tabs">
-                    <div class="tabbed-pane-header-tab selected" tabindex="-1"><span class="tabbed-pane-header-tab-title" title="">Headers</span></div>
-                    <div class="tabbed-pane-header-tab" tabindex="-1"><span class="tabbed-pane-header-tab-title" title="">Preview</span></div>
-                    <div class="tabbed-pane-header-tab" tabindex="-1"><span class="tabbed-pane-header-tab-title" title="">Response</span></div>
-                    <div class="tabbed-pane-header-tab" tabindex="-1"><span class="tabbed-pane-header-tab-title" title="">Cookies</span></div>
-                    <div class="tabbed-pane-header-tab" tabindex="-1"><span class="tabbed-pane-header-tab-title" title="">Timing</span></div>
+                    <div ng-click="showTab(1)" ng-class="getTab(1)" class="tabbed-pane-header-tab selected"><span class="tabbed-pane-header-tab-title" title="">Headers</span></div>
+                    <div ng-click="showTab(2)" ng-class="getTab(2)" class="tabbed-pane-header-tab"><span class="tabbed-pane-header-tab-title" title="">Cookies</span></div>
+                    <div ng-click="showTab(3)" ng-class="getTab(3)" class="tabbed-pane-header-tab"><span class="tabbed-pane-header-tab-title" title="">Timing</span></div>
                   </div>
                 </div>
               </div>
               <div class="tabbed-pane-content">
-                <div class="resource-headers-view visible">
+                <div ng-class="getVisibleTab(1)" class="resource-headers-view">
                   <ol class="outline-disclosure" tabindex="0">
-                    <li title="">
+                    <li>
                       <div class="header-name">Request URL:</div>
-                      <div class="header-value source-code">http://localhost/github/har/index.html</div>
+                      <div class="header-value source-code">{{selectedEntry.url}}</div>
                     </li>
-                    <li title="">
+                    <li>
                       <div class="header-name">Request Method:</div>
-                      <div class="header-value source-code">GET</div>
+                      <div class="header-value source-code">{{selectedEntry.method}}</div>
                     </li>
-                    <li title="">
+                    <li>
                       <div class="header-name">Status Code:</div>
-                      <img class="resource-status-image" src="Images/successGreenDot.png" title="304 Not Modified">
-                      <div class="header-value source-code">304 Not Modified</div>
+                      <img class="resource-status-image" src="Images/successGreenDot.png" title="{{selectedEntry.status}} {{selectedEntry.statusText}}">
+                      <div class="header-value source-code">{{selectedEntry.status}} {{selectedEntry.statusText}}</div>
                     </li>
-                    <li title="" class="parent expanded">Request Headers<span class="header-count"> (10)</span><span class="header-toggle">view source</span></li>
-                    <ol class="children expanded">
-                      <li title="">
-                        <div class="header-name">Accept:</div>
-                        <div class="header-value source-code">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Accept-Charset:</div>
-                        <div class="header-value source-code">ISO-8859-1,utf-8;q=0.7,*;q=0.3</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Accept-Encoding:</div>
-                        <div class="header-value source-code">gzip,deflate,sdch</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Accept-Language:</div>
-                        <div class="header-value source-code">en-US,en;q=0.8</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Cache-Control:</div>
-                        <div class="header-value source-code">max-age=0</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Connection:</div>
-                        <div class="header-value source-code">keep-alive</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Cookie:</div>
-                        <div class="header-value source-code">SESS6d66a06315545013ae2cc5a35d05f19d=RN87YWrZ9S3GXAgI09TE7jxMQTYxSpvqL6LqZyJFhPc; SESS25e4d1c28470251bfeb302205eac8558=848N6N-VnATO7q3YFv_kvpw3Wo6xN3ZxFqqoHxRhtrM; SESS0604a0750b9184391a9a453369d107db=CK0rAF_-ZjJXE11_NhRZWu1jpatMON5koCDqS2tO3TI</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Host:</div>
-                        <div class="header-value source-code">localhost</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">If-Modified-Since:</div>
-                        <div class="header-value source-code">Fri, 24 Aug 2012 02:23:02 GMT</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">User-Agent:</div>
-                        <div class="header-value source-code">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.82 Safari/537.1</div>
+                    <li class="request parent expanded" ng-click="toggleReqHeaders()">Request Headers<span class="header-count"> ({{selectedEntry.reqHeadersCount}})</span></li>
+                    <ol class="request children expanded">
+                      <li ng-repeat="header in selectedEntry._entry.request.headers | orderBy:'name'">
+                        <div class="header-name">{{header.name}}:</div>
+                        <div class="header-value source-code">{{header.value}}</div>
                       </li>
                     </ol>
-                    <li title="" class="hidden parent expanded"></li>
-                    <ol class="children hidden expanded"></ol>
-                    <li title="" class="hidden parent expanded"></li>
-                    <ol class="children hidden expanded"></ol>
-                    <li title="" class="hidden parent expanded"></li>
-                    <ol class="children hidden expanded"></ol>
-                    <li title="" class="hidden parent expanded">Request Payload</li>
-                    <ol class="children hidden expanded"></ol>
-                    <li title="" class="parent expanded">Response Headers<span class="header-count"> (6)</span><span class="header-toggle">view source</span></li>
-                    <ol class="children expanded">
-                      <li title="">
-                        <div class="header-name">Cache-Control:</div>
-                        <div class="header-value source-code">max-age=0</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Connection:</div>
-                        <div class="header-value source-code">Keep-Alive</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Date:</div>
-                        <div class="header-value source-code">Fri, 24 Aug 2012 02:25:14 GMT</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Expires:</div>
-                        <div class="header-value source-code">Fri, 24 Aug 2012 02:25:14 GMT</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Keep-Alive:</div>
-                        <div class="header-value source-code">timeout=5, max=100</div>
-                      </li>
-                      <li title="">
-                        <div class="header-name">Server:</div>
-                        <div class="header-value source-code">Apache</div>
+                    <li class="response parent expanded" ng-click="toggleResHeaders()">Response Headers<span class="header-count"> ({{selectedEntry.resHeadersCount}})</span></li>
+                    <ol class="response children expanded">
+                      <li ng-repeat="header in selectedEntry._entry.response.headers | orderBy:'name'">
+                        <div class="header-name">{{header.name}}:</div>
+                        <div class="header-value source-code">{{header.value}}</div>
                       </li>
                     </ol>
                   </ol>
+                </div>
+                <div ng-class="getVisibleTab(2)"  class="resource-cookies-view">
+                  <div class="fill visible">
+                    <div class="data-grid visible" tabindex="0">
+                      <table class="header">
+                        <colgroup span="8">
+                          <col style="width: 24.056189640035118%; ">
+                          <col style="width: 34.06496927129061%; ">
+                          <col style="width: 7.023705004389816%; ">
+                          <col style="width: 7.023705004389816%; ">
+                          <col style="width: 7.023705004389816%; ">
+                          <col style="width: 6.935908691834943%; ">
+                          <col style="width: 6.935908691834943%; ">
+                          <col style="width: 6.935908691834943%; ">
+                        </colgroup>
+                        <tbody>
+                          <tr>
+                            <th class="0-column sortable"><div>Name</div></th>
+                            <th class="1-column sortable"><div>Value</div></th>
+                            <th class="2-column sortable"><div>Domain</div></th>
+                            <th class="3-column sortable"><div>Path</div></th>
+                            <th class="4-column sortable"><div>Expires</div></th>
+                            <th class="5-column sortable"><div>Size</div></th>
+                            <th class="6-column sortable"><div>HTTP</div></th>
+                            <th class="7-column sortable"><div>Secure</div></th>
+                            <th class="corner"></th>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="data-container">
+                        <table class="data">
+                          <colgroup span="8">
+                            <col style="width: 24.056189640035118%; ">
+                            <col style="width: 34.06496927129061%; ">
+                            <col style="width: 7.023705004389816%; ">
+                            <col style="width: 7.023705004389816%; ">
+                            <col style="width: 7.023705004389816%; ">
+                            <col style="width: 6.935908691834943%; ">
+                            <col style="width: 6.935908691834943%; ">
+                            <col style="width: 6.935908691834943%; ">
+                          </colgroup>
+                          <tbody>
+                            <tr class="request revealed row-group parent expanded">
+                              <td class="0-column disclosure"><div>Request Cookies</div></td>
+                              <td class="1-column"><div></div></td>
+                              <td class="2-column"><div></div></td>
+                              <td class="3-column"><div></div></td>
+                              <td class="4-column"><div></div></td>
+                              <td class="5-column right"><div></div></td>
+                              <td class="6-column centered"><div></div></td>
+                              <td class="7-column centered"><div></div></td>
+                            </tr>
+                            <tr class="revealed" ng-repeat="cookie in selectedEntry._entry.request.cookies">
+                              <td class="0-column disclosure" style="padding-left: 15px; "><div>{{cookie.name}}</div></td>
+                              <td class="1-column"><div>{{cookie.value}}</div></td>
+                              <td class="2-column"><div></div></td><td class="3-column"><div></div></td>
+                              <td class="4-column"><div></div></td><td class="5-column right"><div></div></td>
+                              <td class="6-column centered"><div></div></td>
+                              <td class="7-column centered"><div></div></td>
+                            </tr>
+                            <tr class="response revealed row-group parent expanded">
+                              <td class="0-column disclosure"><div>Response Cookies</div></td>
+                              <td class="1-column"><div></div></td>
+                              <td class="2-column"><div></div></td>
+                              <td class="3-column"><div></div></td>
+                              <td class="4-column"><div></div></td>
+                              <td class="5-column right"><div></div></td>
+                              <td class="6-column centered"><div></div></td>
+                              <td class="7-column centered"><div></div></td>
+                            </tr>
+                            <tr class="revealed" ng-repeat="cookie in selectedEntry._entry.response.cookies">
+                              <td class="0-column disclosure" style="padding-left: 15px; "><div>{{cookie.name}}</div></td>
+                              <td class="1-column"><div>{{cookie.value}}</div></td>
+                              <td class="2-column"><div></div></td><td class="3-column"><div></div></td>
+                              <td class="4-column"><div></div></td><td class="5-column right"><div></div></td>
+                              <td class="6-column centered"><div></div></td>
+                              <td class="7-column centered"><div></div></td>
+                            </tr>
+                            <tr class="filler">
+                              <td class="0-column"></td>
+                              <td class="1-column"></td>
+                              <td class="2-column"></td>
+                              <td class="3-column"></td>
+                              <td class="4-column"></td>
+                              <td class="5-column"></td>
+                              <td class="6-column"></td>
+                              <td class="7-column"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="data-grid-resizer" style="left: 195px; "></div>
+                      <div class="data-grid-resizer" style="left: 471px; "></div>
+                      <div class="data-grid-resizer" style="left: 528px; "></div>
+                      <div class="data-grid-resizer" style="left: 585px; "></div>
+                      <div class="data-grid-resizer" style="left: 642px; "></div>
+                      <div class="data-grid-resizer" style="left: 698px; "></div>
+                      <div class="data-grid-resizer" style="left: 754px; "></div>
+                    </div>
+                  </div>
+                </div>
+                <div ng-class="getVisibleTab(3)" class="resource-timing-view">
+                  <table>
+                    <tr>
+                      <td>Blocking</td>
+                      <td width="200px">
+                        <div class="network-timing-row">
+                          <span class="network-timing-bar connecting" style="left: 31.598215221299547px; right: 148.29382963787347px; ">​</span>
+                          <span class="network-timing-bar-title" style="left: 34.59821522129955px; ">7ms</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Sending</td>
+                      <td width="200px">
+                        <div class="network-timing-row">
+                          <span class="network-timing-bar sending" style="left: 57.45130040236282px; right: 142.5486995976372px; ">​</span>
+                          <span class="network-timing-bar-title" style="left: 60.45130040236282px; ">0</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Waiting</td>
+                      <td width="200px">
+                        <div class="network-timing-row">
+                          <span class="network-timing-bar waiting" style="left: 57.45130040236282px; right: 102.33278931598322px; ">​</span>
+                          <span class="network-timing-bar-title" style="left: 60.45130040236282px; ">14ms</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Receiving</td>
+                      <td width="200px">
+                        <div class="network-timing-row">
+                          <span class="network-timing-bar receiving" style="left: 97.6669805667323px; right: 0px; ">​</span>
+                          <span class="network-timing-bar-title" style="right: 3px; ">{{selectedEntry.receiveTime}}</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
               </div>
             </div>
