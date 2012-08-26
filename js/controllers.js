@@ -26,7 +26,6 @@ function NetworkCtrl($scope, $http) {
     $scope.pageTimings.section = $scope.pageTimings.onLoad / 12;
     $scope.transfer = Number.bytesToString($scope.transfer);
     $scope.labels = $scope.setLabels($scope.pageTimings.section);
-    console.log($scope);
   }
 
   $scope.setLabels = function(section) {
