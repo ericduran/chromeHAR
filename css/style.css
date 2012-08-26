@@ -34,13 +34,18 @@
 
 .split-view-network-views,
 .split-view-resizer {
-  left: 285px;
+  left: 313px;
   right: 0px;
 }
 
 .split-view-sidebar-left.maximized {
   left: 0px;
   right: 0;
+}
+
+.split-view-sidebar-left.minimized {
+  left: 0px;
+  width: 313px;
 }
 
 #network-close-button  {

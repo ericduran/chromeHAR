@@ -30,6 +30,8 @@ HAREntry = function(entry, id, data) {
   // var durationCalculator = new WebInspector.NetworkTransferDurationCalculator();
 
   this.request = this.prepRequest();
+  this.reqHeadersCount = this._entry.request.headers.length;
+  this.resHeadersCount = this._entry.response.headers.length;
 
   // Extra from data.
   this.startedTime = new Date(data.log.pages[0].startedDateTime).getTime();

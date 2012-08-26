@@ -6,6 +6,8 @@ function NetworkCtrl($scope, $http) {
   $scope.pageTimings = '';
   $scope.pageTimings.section = '';
   $scope.checked = false;
+  $scope.tab = '1';
+  $scope.selectedEntry;
 
   $scope.updateHar = function(data) {
     $scope.transfer = 0;
@@ -24,6 +26,7 @@ function NetworkCtrl($scope, $http) {
     $scope.pageTimings.section = $scope.pageTimings.onLoad / 12;
     $scope.transfer = Number.bytesToString($scope.transfer);
     $scope.labels = $scope.setLabels($scope.pageTimings.section);
+    console.log($scope);
   }
 
   $scope.setLabels = function(section) {
@@ -34,12 +37,34 @@ function NetworkCtrl($scope, $http) {
     return labels;
   }
 
+  $scope.toggleReqHeaders = function() {
+    $('.request.parent').toggleClass('expanded');
+    $('.request.children').toggleClass('expanded');
+  }
+
+  $scope.toggleResHeaders = function() {
+    $('.response.parent').toggleClass('expanded');
+    $('.response.children').toggleClass('expanded');
+  }
+
   $scope.showDetails = function(i) {
+    $scope.selectedEntry = $scope.entries[i];
+
     var $leftView = $('.split-view-sidebar-left');
-    $('#network-views').removeClass('hidden')
+    $('#network-views').removeClass('hidden');
     $('.panel.network').addClass('viewing-resource');
     $leftView.removeClass('maximized');
-    console.log(i);
+    $leftView.addClass('minimized');
+    $('#network-container').addClass('brief-mode');
+    $('col:not(.first)').hide().width('0');
+    $('col.first').width('100%');
+  }
+
+  $scope.hideDetails = function() {
+    var $leftView = $('.split-view-sidebar-left');
+    $leftView.addClass('maximized');
+    $('#network-views').addClass('hidden').
+    $('.panel.network').removeClass('viewing-resource');
   }
 
   $scope.sI = 'all'; // Selected Index;
@@ -50,5 +75,26 @@ function NetworkCtrl($scope, $http) {
     else {
       return '';
     }
+  }
+
+  $scope.getTab = function(index) {
+    if (index == $scope.tab) {
+      return 'selected';
+    }
+    else {
+      return '';
+    }
+  }
+  $scope.getVisibleTab = function(index) {
+    if (index == $scope.tab) {
+      return 'visible';
+    }
+    else {
+      return '';
+    }
+  }
+
+  $scope.showTab = function(index) {
+    $scope.tab = index;
   }
 }
