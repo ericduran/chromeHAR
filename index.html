@@ -135,7 +135,7 @@
                       </tr>
                     </tfoot>
                     <tbody>
-                      <tr class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in entries | filter:query | filter:type | orderBy:predicate:reverse">
+                      <tr ng-class="getSelectedRow($index)" class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in entries | filter:query | filter:type | orderBy:predicate:reverse">
                         <td class="name-column" ng-click="showDetails($index)"><div title="{{entry.url}}"><img class="icon">{{entry.parsedURL.lastPathComponent}}<div class="network-cell-subtitle">{{entry.folder}}</div></div></td>
                         <td class="method-column"><div title="{{entry.method}}">{{entry.method}}</div></td>
                         <td class="status-column"><div title="{{entry.status}} {{entry.statusText}}">{{entry.status}}<div class="network-cell-subtitle">{{entry.statusText}}</div></div></td>
@@ -260,14 +260,14 @@
                       <img class="resource-status-image" src="Images/successGreenDot.png" title="{{selectedEntry.status}} {{selectedEntry.statusText}}">
                       <div class="header-value source-code">{{selectedEntry.status}} {{selectedEntry.statusText}}</div>
                     </li>
-                    <li class="request parent expanded" ng-click="toggleReqHeaders()">Request Headers<span class="header-count"> ({{selectedEntry.reqHeadersCount}})</span></li>
+                    <li ng-show="selectedEntry.reqHeadersCount" class="request parent expanded" ng-click="toggleReqHeaders()">Request Headers<span class="header-count"> ({{selectedEntry.reqHeadersCount}})</span></li>
                     <ol class="request children expanded">
                       <li ng-repeat="header in selectedEntry._entry.request.headers | orderBy:'name'">
                         <div class="header-name">{{header.name}}:</div>
                         <div class="header-value source-code">{{header.value}}</div>
                       </li>
                     </ol>
-                    <li class="response parent expanded" ng-click="toggleResHeaders()">Response Headers<span class="header-count"> ({{selectedEntry.resHeadersCount}})</span></li>
+                    <li ng-show="selectedEntry.resHeadersCount" class="response parent expanded" ng-click="toggleResHeaders()">Response Headers<span class="header-count"> ({{selectedEntry.resHeadersCount}})</span></li>
                     <ol class="response children expanded">
                       <li ng-repeat="header in selectedEntry._entry.response.headers | orderBy:'name'">
                         <div class="header-name">{{header.name}}:</div>
@@ -330,8 +330,10 @@
                             <tr class="revealed" ng-repeat="cookie in selectedEntry._entry.request.cookies">
                               <td class="0-column disclosure" style="padding-left: 15px; "><div>{{cookie.name}}</div></td>
                               <td class="1-column"><div>{{cookie.value}}</div></td>
-                              <td class="2-column"><div></div></td><td class="3-column"><div></div></td>
-                              <td class="4-column"><div></div></td><td class="5-column right"><div></div></td>
+                              <td class="2-column"><div>{{cookie.domain}}</div></td>
+                              <td class="3-column"><div>{{cookie.path}}</div></td>
+                              <td class="4-column"><div></div></td>
+                              <td class="5-column right"><div></div></td>
                               <td class="6-column centered"><div></div></td>
                               <td class="7-column centered"><div></div></td>
                             </tr>
@@ -348,8 +350,10 @@
                             <tr class="revealed" ng-repeat="cookie in selectedEntry._entry.response.cookies">
                               <td class="0-column disclosure" style="padding-left: 15px; "><div>{{cookie.name}}</div></td>
                               <td class="1-column"><div>{{cookie.value}}</div></td>
-                              <td class="2-column"><div></div></td><td class="3-column"><div></div></td>
-                              <td class="4-column"><div></div></td><td class="5-column right"><div></div></td>
+                              <td class="2-column"><div>{{cookie.domain}}</div></td>
+                              <td class="3-column"><div>{{cookie.path}}</div></td>
+                              <td class="4-column"><div></div></td>
+                              <td class="5-column right"><div></div></td>
                               <td class="6-column centered"><div></div></td>
                               <td class="7-column centered"><div></div></td>
                             </tr>

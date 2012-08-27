@@ -51,3 +51,7 @@
 #network-close-button  {
     display: block;
 }
+
+.resource-status-image {
+  vertical-align: middle;
+}

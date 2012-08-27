@@ -47,6 +47,7 @@ function NetworkCtrl($scope, $http) {
   }
 
   $scope.showDetails = function(i) {
+    $scope.selectedRow = i;
     $scope.selectedEntry = $scope.entries[i];
 
     var $leftView = $('.split-view-sidebar-left');
@@ -64,11 +65,27 @@ function NetworkCtrl($scope, $http) {
     $leftView.addClass('maximized');
     $('#network-views').addClass('hidden').
     $('.panel.network').removeClass('viewing-resource');
+    $leftView.removeClass('minimized');
+    $('#network-container').removeClass('brief-mode');
+    // $('col').show().width('0');
+    // $('col.first').width('100%');
   }
 
   $scope.sI = 'all'; // Selected Index;
+
+
+  // TODO: merge all these get/set index functions.
   $scope.getClass = function (type) {
     if (type == $scope.sI) {
+      return 'selected';
+    }
+    else {
+      return '';
+    }
+  }
+
+  $scope.getSelectedRow = function (i) {
+    if (i == $scope.selectedRow) {
       return 'selected';
     }
     else {
