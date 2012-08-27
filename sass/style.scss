@@ -1,3 +1,4 @@
+
 .toolbar-item.pagespeed-panel .toolbar-icon {
   background-image: url(../img/pagespeed-devtools-icon.png);
 }
@@ -47,40 +48,45 @@
   width: 313px;
 }
 
-#network-close-button {
-  display: block;
+#network-close-button  {
+    display: block;
 }
 
 .resource-status-image {
   vertical-align: middle;
 }
 
+
 /* Use class instead of styles */
-.split-view-sidebar-left.maximized colgroup .first {
-  width: 20.05610098176718%;
-}
-.split-view-sidebar-left.maximized colgroup .sec,
-.split-view-sidebar-left.maximized colgroup .third,
-.split-view-sidebar-left.maximized colgroup .fourth {
-  width: 7.03085553997195%;
-}
-.split-view-sidebar-left.maximized colgroup .five,
-.split-view-sidebar-left.maximized colgroup .six {
-  width: 6.9607293127629735%;
-}
-.split-view-sidebar-left.maximized colgroup .sev {
-  width: 45.90182328190743%;
+.split-view-sidebar-left.maximized colgroup {
+  .first {
+    width: 20.05610098176718%;
+  }
+  .sec,
+  .third,
+  .fourth {
+    width: 7.03085553997195%;
+  }
+  .five,
+  .six {
+    width: 6.9607293127629735%;
+  }
+  .sev {
+    width: 45.90182328190743%;
+  }
 }
 
-.split-view-sidebar-left.minimized colgroup .first {
-  width: 100%%;
-}
-.split-view-sidebar-left.minimized colgroup .sec,
-.split-view-sidebar-left.minimized colgroup .third,
-.split-view-sidebar-left.minimized colgroup .fourth,
-.split-view-sidebar-left.minimized colgroup .five,
-.split-view-sidebar-left.minimized colgroup .six,
-.split-view-sidebar-left.minimized colgroup .sev {
-  width: 0px;
-  display: none;
+.split-view-sidebar-left.minimized colgroup {
+  .first {
+    width: 100%%;
+  }
+  .sec,
+  .third,
+  .fourth,
+  .five,
+  .six,
+  .sev {
+    width: 0px;
+    display: none;
+  }
 }
