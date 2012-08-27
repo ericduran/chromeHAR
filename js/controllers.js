@@ -56,19 +56,16 @@ function NetworkCtrl($scope, $http) {
     $leftView.removeClass('maximized');
     $leftView.addClass('minimized');
     $('#network-container').addClass('brief-mode');
-    $('col:not(.first)').hide().width('0');
-    $('col.first').width('100%');
   }
 
   $scope.hideDetails = function() {
+    $scope.selectedRow = '-1';
     var $leftView = $('.split-view-sidebar-left');
     $leftView.addClass('maximized');
-    $('#network-views').addClass('hidden').
+    $('#network-views').addClass('hidden');
     $('.panel.network').removeClass('viewing-resource');
     $leftView.removeClass('minimized');
     $('#network-container').removeClass('brief-mode');
-    // $('col').show().width('0');
-    // $('col.first').width('100%');
   }
 
   $scope.sI = 'all'; // Selected Index;
