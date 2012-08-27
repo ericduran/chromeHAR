@@ -13,6 +13,7 @@ An attemp at building a HAR viewer that mimics [Chrome Dev Tools](https://develo
  - User Settings (I'm not quiet sure what to put in there yet)
  - Bottom Info - (# of Request, Transfer size, etc..)
  - Offline Support
+ - A bunch of things I missed
 
 ###Known Bugs
  - Probably a lot.
