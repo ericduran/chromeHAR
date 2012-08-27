@@ -74,13 +74,13 @@
               <div class="data-grid network-log-grid visible filter-all" tabindex="0">
                 <table class="header">
                   <colgroup span="7">
-                    <col class="first" style="width: 20.05610098176718%; ">
-                    <col style="width: 7.03085553997195%; ">
-                    <col style="width: 7.03085553997195%; ">
-                    <col style="width: 7.03085553997195%; ">
-                    <col style="width: 6.9607293127629735%; ">
-                    <col style="width: 6.9607293127629735%; ">
-                    <col style="width: 45.90182328190743%; ">
+                    <col class="first">
+                    <col class="sec">
+                    <col class="third">
+                    <col class="fourth">
+                    <col class="five">
+                    <col class="six">
+                    <col class="sev">
                   </colgroup>
                   <tbody>
                     <tr>
@@ -120,13 +120,13 @@
                 <div class="data-container">
                   <table class="data">
                     <colgroup span="7">
-                      <col class="first" style="width: 20.05610098176718%; ">
-                      <col style="width: 7.03085553997195%; ">
-                      <col style="width: 7.03085553997195%; ">
-                      <col style="width: 7.03085553997195%; ">
-                      <col style="width: 6.9607293127629735%; ">
-                      <col style="width: 6.9607293127629735%; ">
-                      <col style="width: 45.90182328190743%; ">
+                      <col class="first">
+                      <col class="sec">
+                      <col class="third">
+                      <col class="fourth">
+                      <col class="five">
+                      <col class="six">
+                      <col class="sev">
                     </colgroup>
                     <tfoot ng-show="checked">
                       <tr class="revealed network-summary-bar">
@@ -370,51 +370,16 @@
                           </tbody>
                         </table>
                       </div>
-                      <div class="data-grid-resizer" style="left: 195px; "></div>
-                      <div class="data-grid-resizer" style="left: 471px; "></div>
-                      <div class="data-grid-resizer" style="left: 528px; "></div>
-                      <div class="data-grid-resizer" style="left: 585px; "></div>
-                      <div class="data-grid-resizer" style="left: 642px; "></div>
-                      <div class="data-grid-resizer" style="left: 698px; "></div>
-                      <div class="data-grid-resizer" style="left: 754px; "></div>
                     </div>
                   </div>
                 </div>
                 <div ng-class="getVisibleTab(3)" class="resource-timing-view">
                   <table>
                     <tr>
-                      <td>Blocking</td>
-                      <td width="200px">
-                        <div class="network-timing-row">
-                          <span class="network-timing-bar connecting" style="left: 31.598215221299547px; right: 148.29382963787347px; ">​</span>
-                          <span class="network-timing-bar-title" style="left: 34.59821522129955px; ">7ms</span>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Sending</td>
-                      <td width="200px">
-                        <div class="network-timing-row">
-                          <span class="network-timing-bar sending" style="left: 57.45130040236282px; right: 142.5486995976372px; ">​</span>
-                          <span class="network-timing-bar-title" style="left: 60.45130040236282px; ">0</span>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Waiting</td>
-                      <td width="200px">
-                        <div class="network-timing-row">
-                          <span class="network-timing-bar waiting" style="left: 57.45130040236282px; right: 102.33278931598322px; ">​</span>
-                          <span class="network-timing-bar-title" style="left: 60.45130040236282px; ">14ms</span>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
                       <td>Receiving</td>
                       <td width="200px">
                         <div class="network-timing-row">
-                          <span class="network-timing-bar receiving" style="left: 97.6669805667323px; right: 0px; ">​</span>
-                          <span class="network-timing-bar-title" style="right: 3px; ">{{selectedEntry.receiveTime}}</span>
+                          <span class="network-timing-bar-title">{{selectedEntry.receiveTime}}</span>
                         </div>
                       </td>
                     </tr>
