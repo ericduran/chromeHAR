@@ -7,6 +7,7 @@ function NetworkCtrl($scope, $http) {
   $scope.pageTimings.section = '';
   $scope.checked = false;
   $scope.tab = '1';
+  $scope.sI = 'all';
   $scope.selectedEntry;
 
   $scope.updateHar = function(data) {
@@ -73,9 +74,6 @@ function NetworkCtrl($scope, $http) {
     $leftView.removeClass('minimized');
     $('#network-container').removeClass('brief-mode');
   }
-
-  $scope.sI = 'all'; // Selected Index;
-
 
   // TODO: merge all these get/set index functions.
   $scope.getClass = function (type) {
