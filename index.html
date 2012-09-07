@@ -39,10 +39,6 @@
       <div class="toolbar-icon"></div>
       <div class="toolbar-label">Network</div>
     </button>
-    <button class="toolbar-item toggleable pagespeed-panel">
-      <div class="toolbar-icon"></div>
-      <div class="toolbar-label">PageSpeed</div>
-    </button>
   </div>
   <div id="main">
     <div id="main-status-bar" class="status-bar">
@@ -406,21 +402,7 @@
   <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
 
   <script src="js/script.js"></script>
-
-  <!-- Required Chrome Dev Tools JS -->
-  <!--
-  // Remove after testing. These should no longer be require.
-  <script src="chrome/inspector.js"></script>
-  <script src="chrome/DevTools.js"></script>
-  <script src="chrome/HAREntry.js"></script>
-  <script src="chrome/View.js"></script>
-  <script src="chrome/Panel.js"></script>
-  <script src="chrome/NetworkPanel.js"></script>
-  -->
-  <script src="chrome/utilities.js"></script>
-  <script src="chrome/Object.js"></script>
-  <script src="chrome/UIUtils.js"></script>
-  <script src="chrome/ResourceUtils.js"></script>
+  <script src="js/libs/devTools.js"></script>
   <script src="js/libs/HAREntry.js"></script>
   <script src="js/controllers.js"></script>
   <script>
