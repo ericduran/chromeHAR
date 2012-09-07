@@ -36,6 +36,12 @@ function NetworkCtrl($scope, $http) {
     return labels;
   }
 
+  $scope.setSort = function(sort) {
+    $scope.predicate = sort;
+    $scope.reverse = !$scope.reverse;
+    console.log(this);
+  }
+
   $scope.toggleReqHeaders = function() {
     $('.request.parent').toggleClass('expanded');
     $('.request.children').toggleClass('expanded');
@@ -73,38 +79,19 @@ function NetworkCtrl($scope, $http) {
 
   // TODO: merge all these get/set index functions.
   $scope.getClass = function (type) {
-    if (type == $scope.sI) {
-      return 'selected';
-    }
-    else {
-      return '';
-    }
+    return ( (type == $scope.sI) ? 'selected' : '');
   }
 
   $scope.getSelectedRow = function (i) {
-    if (i == $scope.selectedRow) {
-      return 'selected';
-    }
-    else {
-      return '';
-    }
+    return ( (i == $scope.selectedRow) ? 'selected' : '');
   }
 
   $scope.getTab = function(index) {
-    if (index == $scope.tab) {
-      return 'selected';
-    }
-    else {
-      return '';
-    }
+    return ( (index == $scope.tab) ? 'selected' : '');
   }
+
   $scope.getVisibleTab = function(index) {
-    if (index == $scope.tab) {
-      return 'visible';
-    }
-    else {
-      return '';
-    }
+    return ( (index == $scope.tab) ? 'visible' : '');
   }
 
   $scope.showTab = function(index) {
