@@ -38,6 +38,18 @@
     $(this).toggleClass('toggled-on');
     $('.network-log-grid').toggleClass('small');
   });
+
+  $('.sample').click(function (e){
+    e.preventDefault();
+    // Lets load the sample har
+    var scope = angular.element("body").scope();
+    $('#dropArea').removeClass('visible');
+    $.getJSON('sample.har', function(d) {
+      scope.$apply(function() {
+        scope.updateHar(d);
+      });
+    });
+  });
 })(window);
 
 // Hacks to workaround issues with chrome dev tools js.

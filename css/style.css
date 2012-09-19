@@ -85,7 +85,8 @@
   display: none;
 }
 
-.fork {
+.fork,
+.sample {
   position: relative;
   overflow: visible;
   display: inline-block;
