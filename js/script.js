@@ -1,55 +1,63 @@
 (function(window, undefined) {
+  'use strict';
 
-  window.ondragover = function () {
-    return false;
-  };
+  var support = Modernizr.draganddrop && document.querySelector && window.JSON;
 
-  window.ondragend = function () {
-    return false;
-  };
-
-  window.ondrop = function (e) {
-    e.stopPropagation();
-    e.preventDefault();
-    var file = e.dataTransfer.files[0];
-    var reader = new FileReader();
-    reader.onload = function (event) {
-      var data = event.target.result;
-      try {
-        data = JSON.parse(data);
-        // TODO: Fixme.
-        var scope = angular.element("body").scope();
-        $('#dropArea').removeClass('visible');
-        scope.$apply(function() {
-          scope.updateHar(data);
-        });
-      }
-      catch(e) {
-        alert(e);
-      }
+  if (support) {
+    $("body").addClass("disabled");
+  }
+  else {
+    window.ondragover = function () {
+      return false;
     };
-    reader.readAsText(file);
-    return false;
-  };
+
+    window.ondragend = function () {
+      return false;
+    };
+
+    window.ondrop = function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      var file = e.dataTransfer.files[0];
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        var data = event.target.result;
+        try {
+          data = JSON.parse(data);
+          // TODO: Fixme.
+          var scope = angular.element("body").scope();
+          $('#dropArea').removeClass('visible');
+          scope.$apply(function() {
+            scope.updateHar(data);
+          });
+        }
+        catch(e) {
+          alert(e);
+        }
+      };
+      reader.readAsText(file);
+      return false;
+    };
 
 
-  // TODO: Fixme, Do with angular.
-  $('.network-larger-resources-status-bar-item').click(function (e){
-    $(this).toggleClass('toggled-on');
-    $('.network-log-grid').toggleClass('small');
-  });
+    // TODO: Fixme, Do with angular.
+    $('.network-larger-resources-status-bar-item').click(function (e){
+      $(this).toggleClass('toggled-on');
+      $('.network-log-grid').toggleClass('small');
+    });
 
-  $('.sample').click(function (e){
-    e.preventDefault();
-    // Lets load the sample har
-    var scope = angular.element("body").scope();
-    $('#dropArea').removeClass('visible');
-    $.getJSON('sample.har', function(d) {
-      scope.$apply(function() {
-        scope.updateHar(d);
+    $('.sample').click(function (e){
+      e.preventDefault();
+      // Lets load the sample har
+      var scope = angular.element("body").scope();
+      $('#dropArea').removeClass('visible');
+      $.getJSON('sample.har', function(d) {
+        scope.$apply(function() {
+          scope.updateHar(d);
+        });
       });
     });
-  });
+  }
 })(window);
 
 // Hacks to workaround issues with chrome dev tools js.
