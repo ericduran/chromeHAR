@@ -1,129 +1,134 @@
 
 // See http://groups.google.com/group/http-archive-specification/web/har-1-2-spec
 // for HAR specification.
+var HAREntry = (function HAREntryClosure() {
+  'use strict';
 
-HAREntry = function(entry, id, data) {
-  this._entry = entry;
-  this._id = id;
+  function HAREntry(entry, id, data) {
+    this._entry = entry;
+    this._id = id;
 
-  // Response
-  this.status = this._entry.response.status;
-  this.statusText = this._entry.response.statusText;
-  this.mimeType = this._entry.response.content.mimeType
-  this.receive = this._entry.timings.receive
-  this.receiveTime = this._entry.timings.receive + "ms";
+    // Response
+    this.status = this._entry.response.status;
+    this.statusText = this._entry.response.statusText;
+    this.mimeType = this._entry.response.content.mimeType
+    this.receive = this._entry.timings.receive
+    this.receiveTime = this._entry.timings.receive + "ms";
 
-  // Request
-  this.url = this._entry.request.url;
-  this.method = this._entry.request.method;
+    // Request
+    this.url = this._entry.request.url;
+    this.method = this._entry.request.method;
 
-  // Custom
-  this.parsedURL = new WebInspector.ParsedURL(entry.request.url);
-  this.name = this.getRequestName();
-  this.folder = this.getFolder();
-  this.size = this.getSize();
-  this.contentSize = this.getContentSize();
-  this.time = this.getTime();
-  this.latency = this.getLatency();
+    // Custom
+    this.parsedURL = new WebInspector.ParsedURL(entry.request.url);
+    this.name = this.getRequestName();
+    this.folder = this.getFolder();
+    this.size = this.getSize();
+    this.contentSize = this.getContentSize();
+    this.time = this.getTime();
+    this.latency = this.getLatency();
 
-  // var timeCalculator = new WebInspector.NetworkTransferTimeCalculator();
-  // var durationCalculator = new WebInspector.NetworkTransferDurationCalculator();
+    // var timeCalculator = new WebInspector.NetworkTransferTimeCalculator();
+    // var durationCalculator = new WebInspector.NetworkTransferDurationCalculator();
 
-  this.request = this.prepRequest();
-  this.reqHeadersCount = this._entry.request.headers.length;
-  this.resHeadersCount = this._entry.response.headers.length;
+    this.request = this.prepRequest();
+    this.reqHeadersCount = this._entry.request.headers.length;
+    this.resHeadersCount = this._entry.response.headers.length;
 
-  // Extra from data.
-  this.startedTime = new Date(data.log.pages[0].startedDateTime).getTime();
-  this.graphs = this.graphs(data);
-  // this.startedDateTime = new Date(this._request.startTime * 1000);
+    // Extra from data.
+    this.startedTime = new Date(data.log.pages[0].startedDateTime).getTime();
+    this.graphs = this.graphs(data);
+    // this.startedDateTime = new Date(this._request.startTime * 1000);
 
-  // Raw values for Sort and Filters.
-  this.nameSort = this.parsedURL.lastPathComponent;
-  this.timeSort = this._entry.time;
-  this.sizeSort = '';
-}
-
-HAREntry.prototype = {
-
-  getFolder: function () {
-    var path = this.parsedURL.path;
-    var indexOfQuery = path.indexOf("?");
-    if (indexOfQuery !== -1)
-        path = path.substring(0, indexOfQuery);
-    var lastSlashIndex = path.lastIndexOf("/");
-    return lastSlashIndex !== -1 ? path.substring(0, lastSlashIndex) : "";
-  },
-
-  getRequestName: function () {
-    var types = [];
-    var mimeType = this._entry.response.content.mimeType;
-    types['text/html'] = 'document';
-    types['text/css'] = 'stylesheet';
-    types['text/javascript'] = 'script';
-    types['application/javascript'] = 'script';
-    types['image/png'] = 'image';
-    types['image/gif'] = 'image';
-    types['image/jpeg'] = 'image';
-
-    return types[mimeType];
-  },
-
-  getSize: function () {
-    // TODO: Fixme, this doesn't correctly pick up items from cache.
-    if (this._entry.cached)
-      return 0;
-    if (this._entry.response.status === 304) // Not modified
-      return Number.bytesToString(this._entry.response.headersSize);
-
-    return Number.bytesToString(this._entry.request.headersSize + this._entry.request.bodySize);
-  },
-
-  getContentSize: function () {
-    return Number.bytesToString(this._entry.response.content.size);
-  },
-
-  getRawContentSize: function () {
-    return this._entry.response.content.size;
-  },
-
-  getTime: function () {
-    if (this._entry.time > 0) {
-      return this._entry.time + "ms";
-    }
-    return 0;
-  },
-
-  getLatency: function () {
-    if (this._entry.time > 0) {
-      return this._entry.time - this._entry.timings.receive + "ms";
-    }
-    return 0;
-
-  },
-
-  prepRequest: function () {
-    var request = {};
-    request.startTime = new Date(this._entry.startedDateTime).getTime();
-    request.responseReceivedTime = request.startTime;
-    request.endTime = request.startTime + this._entry.time;
-    this.minimumBoundary = 0;
-    this.boundarySpan = 100;
-    this.diff = request.endTime - request.responseReceivedTime;
-    return request;
-  },
-
-  graphs: function (data) {
-    var graph = {};
-    graph.pOL = data.log.pages[0].pageTimings.onLoad;
-    graph.lOR = this.request.startTime - this.startedTime;
-    graph.Lat = this._entry.time - this.receive;
-    graph.end = this._entry.time + this.receive;
-    graph.latency_left = (graph.lOR  / graph.pOL) * 100;
-    graph.latency_right =  100 - (((graph.lOR + graph.Lat) / graph.pOL) * 100);
-    graph.receiving_left = ((graph.lOR + graph.Lat)  / graph.pOL) * 100;
-    graph.receiving_right = ''; // TODO: Fixme
-    return graph;
+    // Raw values for Sort and Filters.
+    this.nameSort = this.parsedURL.lastPathComponent;
+    this.timeSort = this._entry.time;
+    this.sizeSort = '';
   }
-}
+
+  HAREntry.prototype = {
+
+    getFolder: function () {
+      var path = this.parsedURL.path;
+      var indexOfQuery = path.indexOf("?");
+      if (indexOfQuery !== -1)
+          path = path.substring(0, indexOfQuery);
+      var lastSlashIndex = path.lastIndexOf("/");
+      return lastSlashIndex !== -1 ? path.substring(0, lastSlashIndex) : "";
+    },
+
+    getRequestName: function () {
+      var types = [];
+      var mimeType = this._entry.response.content.mimeType;
+      types['text/html'] = 'document';
+      types['text/css'] = 'stylesheet';
+      types['text/javascript'] = 'script';
+      types['application/javascript'] = 'script';
+      types['image/png'] = 'image';
+      types['image/gif'] = 'image';
+      types['image/jpeg'] = 'image';
+
+      return types[mimeType];
+    },
+
+    getSize: function () {
+      // TODO: Fixme, this doesn't correctly pick up items from cache.
+      if (this._entry.cached)
+        return 0;
+      if (this._entry.response.status === 304) // Not modified
+        return Number.bytesToString(this._entry.response.headersSize);
+
+      return Number.bytesToString(this._entry.request.headersSize + this._entry.request.bodySize);
+    },
+
+    getContentSize: function () {
+      return Number.bytesToString(this._entry.response.content.size);
+    },
+
+    getRawContentSize: function () {
+      return this._entry.response.content.size;
+    },
+
+    getTime: function () {
+      if (this._entry.time > 0) {
+        return this._entry.time + "ms";
+      }
+      return 0;
+    },
+
+    getLatency: function () {
+      if (this._entry.time > 0) {
+        return this._entry.time - this._entry.timings.receive + "ms";
+      }
+      return 0;
+
+    },
+
+    prepRequest: function () {
+      var request = {};
+      request.startTime = new Date(this._entry.startedDateTime).getTime();
+      request.responseReceivedTime = request.startTime;
+      request.endTime = request.startTime + this._entry.time;
+      this.minimumBoundary = 0;
+      this.boundarySpan = 100;
+      this.diff = request.endTime - request.responseReceivedTime;
+      return request;
+    },
+
+    graphs: function (data) {
+      var graph = {};
+      graph.pOL = data.log.pages[0].pageTimings.onLoad;
+      graph.lOR = this.request.startTime - this.startedTime;
+      graph.Lat = this._entry.time - this.receive;
+      graph.end = this._entry.time + this.receive;
+      graph.latency_left = (graph.lOR  / graph.pOL) * 100;
+      graph.latency_right =  100 - (((graph.lOR + graph.Lat) / graph.pOL) * 100);
+      graph.receiving_left = ((graph.lOR + graph.Lat)  / graph.pOL) * 100;
+      graph.receiving_right = ''; // TODO: Fixme
+      return graph;
+    }
+  }
+
+  return HAREntry;
+})();
 
