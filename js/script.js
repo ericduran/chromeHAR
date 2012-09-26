@@ -3,7 +3,7 @@
 
   var support = Modernizr.draganddrop && document.querySelector && window.JSON;
 
-  if (support) {
+  if (!support) {
     $("body").addClass("disabled");
   }
   else {
