@@ -4,9 +4,11 @@
   var support = Modernizr.draganddrop && document.querySelector && window.JSON;
 
   if (!support) {
+    // Add disabled class.
     $("body").addClass("disabled");
   }
   else {
+
     window.ondragover = function () {
       return false;
     };
@@ -46,9 +48,12 @@
       $('.network-log-grid').toggleClass('small');
     });
 
+
+    // Add a sample HAR that way anyone could easily test the app.
     $('.sample').click(function (e){
       e.preventDefault();
-      // Lets load the sample har
+
+      // Lets load the sample HAR.
       var scope = angular.element("body").scope();
       $('#dropArea').removeClass('visible');
       $.getJSON('sample.har', function(d) {
