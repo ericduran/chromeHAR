@@ -1,6 +1,12 @@
+/**
+ * Network Tab Controller.
+ * @param $scope
+ */
+function NetworkCtrl($scope) {
+  'use strict';
 
-function NetworkCtrl($scope, $http) {
-  $scope.entries = [];
+  // TODO: Make this more test friendly.
+  $scope.entries = $scope.entries || [];
   $scope.data = '';
   $scope.startedTime = '';
   $scope.pageTimings = '';
