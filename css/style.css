@@ -6,6 +6,21 @@
   width: 200px;
 }
 
+.support {
+  display: block;
+}
+
+.no-support {
+  display: none;
+}
+
+.disabled .support {
+  display: none;
+}
+.disabled .no-support {
+  display: block;
+}
+
 #dropArea.visible {
   width: 100%;
   height: 100%;
@@ -87,9 +102,6 @@
 
 .fork,
 .sample {
-  position: relative;
-  overflow: visible;
-  display: inline-block;
   padding: 0.5em 1em;
   border: 1px solid #D4D4D4;
   margin: 0 15px 0 0;
@@ -102,11 +114,11 @@
   cursor: pointer;
   outline: none;
   background-color: #ECECEC;
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F4F4F4), to(#ECECEC));
-  background-image: -moz-linear-gradient(#F4F4F4, #ECECEC);
-  background-image: -ms-linear-gradient(#F4F4F4, #ECECEC);
-  background-image: -o-linear-gradient(#F4F4F4, #ECECEC);
-  background-image: linear-gradient(#F4F4F4, #ECECEC);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec));
+  background-image: -moz-linear-gradient(#f4f4f4, #ececec);
+  background-image: -ms-linear-gradient(#f4f4f4, #ececec);
+  background-image: -o-linear-gradient(#f4f4f4, #ececec);
+  background-image: linear-gradient(#f4f4f4, #ececec);
   -moz-background-clip: padding;
   background-clip: padding-box;
   border-radius: 0.2em;
