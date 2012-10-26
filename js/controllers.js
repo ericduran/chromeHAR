@@ -107,11 +107,17 @@ angular.module('net', ['net.dnd']).controller('NetworkCtrl', function ($scope) {
     file = e.dataTransfer.files[0];
     reader = new FileReader();
     reader.onload = function (event) {
-      data = JSON.parse(event.target.result);
-      $('#dropArea').removeClass('visible');
-      $scope.$apply(function() {
-        $scope.updateHar(data);
-      });
+      try {
+        data = JSON.parse(event.target.result);
+        $('#dropArea').removeClass('visible');
+        $scope.$apply(function() {
+          $scope.updateHar(data);
+        });
+      }
+      catch (e) {
+        // For now lets just throw an alert.
+        alert('Unsupported file type.');
+      }
     }
     reader.readAsText(file);
     return false;
