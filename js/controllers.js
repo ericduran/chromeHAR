@@ -1,11 +1,9 @@
 /**
  * Network Tab Controller.
- * @param $scope
  */
-function NetworkCtrl($scope) {
+angular.module('net', ['net.dnd']).controller('NetworkCtrl', function ($scope) {
   'use strict';
 
-  // TODO: Make this more test friendly.
   $scope.entries = $scope.entries || [];
   $scope.data = '';
   $scope.startedTime = '';
@@ -46,7 +44,6 @@ function NetworkCtrl($scope) {
   $scope.setSort = function(sort) {
     $scope.predicate = sort;
     $scope.reverse = !$scope.reverse;
-    console.log(this);
   }
 
   $scope.toggleReqHeaders = function() {
@@ -101,4 +98,47 @@ function NetworkCtrl($scope) {
   $scope.showTab = function(index) {
     $scope.tab = index;
   }
-}
+
+  $scope.drop = function ($event) {
+    var e, file, reader, data;
+    $event.preventDefault();
+    $event.stopPropagation();
+    e = $event.originalEvent;
+    file = e.dataTransfer.files[0];
+    reader = new FileReader();
+    reader.onload = function (event) {
+      data = JSON.parse(event.target.result);
+      $('#dropArea').removeClass('visible');
+      $scope.$apply(function() {
+        $scope.updateHar(data);
+      });
+    }
+    reader.readAsText(file);
+    return false;
+  }
+});
+
+/**
+ * Angular Drag and Drop Event bindings.
+ *
+ * @example <div dnd-dragover="blah()">
+ * @example <div dnd-dragEnd="blah()">
+ * @example <div dnd-drop="blah()">
+ */
+var dndModule = angular.module('net.dnd', []);
+['Dragstart', 'Drag', 'Dragenter', 'Dragleave', 'Dragover', 'Drop', 'Dragend'].forEach(
+  function(name) {
+    'use strict';
+    var directiveName = 'dnd' + name;
+    dndModule.directive(directiveName, ['$parse', function($parse, $scope) {
+      return function(scope, element, attr) {
+        var fn = $parse(attr[directiveName]);
+        element.bind(name.toLowerCase(), function(event) {
+          scope.$apply(function() {
+            fn(scope, {$event:event});
+          });
+        });
+      };
+    }]);
+  }
+);

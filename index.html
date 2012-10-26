@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="net">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -22,11 +22,12 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script src="js/libs/modernizr.custom.min.js"></script>
 </head>
-<body class="detached" ng-controller="NetworkCtrl">
-  <div id="dropArea" class="visible">
+<body class="detached" ng-controller="NetworkCtrl" dnd-drop="drop($event)">
+  <div id="dropArea" class="visible" >
     <h2 class="support"><span>Drag and <em>Drop</em> HARs here</span></h2>
     <h2 class="no-support">Your browser doesn't support Drag and Drop, or some other modern required features. :-p</h2>
   </div>
+
   <div id="toolbar">
     <div id="toolbar-controls">
       <div class="toolbar-item" id="toolbar-sample-item">
