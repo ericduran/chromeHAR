@@ -12,7 +12,7 @@ angular.module('net', ['net.dnd']).controller('NetworkCtrl', function ($scope) {
   $scope.checked = false;
   $scope.tab = '1';
   $scope.sI = 'all';
-  $scope.selectedEntry;
+  $scope.selectedEntry = null;
 
   $scope.updateHar = function(data) {
     $scope.transfer = 0;
@@ -31,7 +31,7 @@ angular.module('net', ['net.dnd']).controller('NetworkCtrl', function ($scope) {
     $scope.pageTimings.section = $scope.pageTimings.onLoad / 12;
     $scope.transfer = Number.bytesToString($scope.transfer);
     $scope.labels = $scope.setLabels($scope.pageTimings.section);
-  }
+  };
 
   $scope.setLabels = function(section) {
     var labels = {};
@@ -39,22 +39,22 @@ angular.module('net', ['net.dnd']).controller('NetworkCtrl', function ($scope) {
       labels[i] = String.sprintf("%0.00fms", section * i);
     };
     return labels;
-  }
+  };
 
   $scope.setSort = function(sort) {
     $scope.predicate = sort;
     $scope.reverse = !$scope.reverse;
-  }
+  };
 
   $scope.toggleReqHeaders = function() {
     $('.request.parent').toggleClass('expanded');
     $('.request.children').toggleClass('expanded');
-  }
+  };
 
   $scope.toggleResHeaders = function() {
     $('.response.parent').toggleClass('expanded');
     $('.response.children').toggleClass('expanded');
-  }
+  };
 
   $scope.showDetails = function(i) {
     $scope.selectedRow = i;
@@ -66,7 +66,7 @@ angular.module('net', ['net.dnd']).controller('NetworkCtrl', function ($scope) {
     $leftView.removeClass('maximized');
     $leftView.addClass('minimized');
     $('#network-container').addClass('brief-mode');
-  }
+  };
 
   $scope.hideDetails = function() {
     $scope.selectedRow = '-1';
@@ -76,28 +76,28 @@ angular.module('net', ['net.dnd']).controller('NetworkCtrl', function ($scope) {
     $('.panel.network').removeClass('viewing-resource');
     $leftView.removeClass('minimized');
     $('#network-container').removeClass('brief-mode');
-  }
+  };
 
   // TODO: merge all these get/set index functions.
   $scope.getClass = function (type) {
     return ( (type == $scope.sI) ? 'selected' : '');
-  }
+  };
 
   $scope.getSelectedRow = function (i) {
     return ( (i == $scope.selectedRow) ? 'selected' : '');
-  }
+  };
 
   $scope.getTab = function(index) {
     return ( (index == $scope.tab) ? 'selected' : '');
-  }
+  };
 
   $scope.getVisibleTab = function(index) {
     return ( (index == $scope.tab) ? 'visible' : '');
-  }
+  };
 
   $scope.showTab = function(index) {
     $scope.tab = index;
-  }
+  };
 
   $scope.drop = function ($event) {
     var e, file, reader, data;
@@ -121,7 +121,8 @@ angular.module('net', ['net.dnd']).controller('NetworkCtrl', function ($scope) {
     }
     reader.readAsText(file);
     return false;
-  }
+  };
+
 });
 
 /**
