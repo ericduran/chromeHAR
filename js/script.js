@@ -31,4 +31,4 @@
 
 // Hacks to workaround issues with chrome dev tools js.
 var Preferences = Preferences || {};
-var WebInspector = WebInspector || {}
+var WebInspector = WebInspector || {};
