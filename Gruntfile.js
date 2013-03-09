@@ -1,8 +1,6 @@
 module.exports = function(grunt) {
   "use strict";
 
-  grunt.loadNpmTasks("grunt-contrib-jshint");
-
   // Project configuration.
   grunt.initConfig({
     jshint: {
@@ -14,10 +12,34 @@ module.exports = function(grunt) {
       options: {
         jshintrc: ".jshintrc"
       }
+    },
+    compass: {
+      all: {
+        options: {
+          config: "config.rb"
+        }
+      }
+    },
+    watch: {
+      gruntfile: {
+        files: "Gruntfile.js",
+        tasks: ["jshint:gruntfile"],
+        options: {
+          nocase: true
+        }
+      },
+      src: {
+        files: ["sass/*.scss"],
+        tasks: ["compass"]
+      }
     }
   });
 
+  grunt.loadNpmTasks("grunt-contrib-jshint");
+  grunt.loadNpmTasks("grunt-contrib-compass");
+  grunt.loadNpmTasks("grunt-contrib-watch");
+
   // Default task.
-  grunt.registerTask("default", ["jshint"]);
+  grunt.registerTask("default", ["compass", "jshint"]);
 
 };
