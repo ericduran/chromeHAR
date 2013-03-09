@@ -23,18 +23,16 @@
   <script src="js/libs/modernizr.custom.min.js"></script>
 </head>
 <body class="detached" ng-controller="NetworkCtrl" dnd-drop="drop($event)">
+  <a href="https://github.com/ericduran/chromeHAR"><img class="fork-banner" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
   <div id="dropArea" class="visible" >
     <h2 class="support"><span>Drag and <em>Drop</em> HARs here</span></h2>
     <h2 class="no-support">Your browser doesn't support Drag and Drop, or some other modern required features. :-p</h2>
   </div>
 
   <div id="toolbar">
-    <div id="toolbar-controls">
+    <div class="toolbar-controls">
       <div class="toolbar-item" id="toolbar-sample-item">
         <a href="#" class="sample">Load sample HAR</a>
-      </div>
-      <div class="toolbar-item" id="toolbar-github-item">
-        <a href="https://github.com/ericduran/chromeHAR" class="fork" rel="external">Fork me on Github</a>
       </div>
       <div class="toolbar-item" id="toolbar-search-item">
         <input id="search" type="search" incremental="" results="0" placeholder="Search Network" ng-model="query">

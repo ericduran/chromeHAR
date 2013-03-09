@@ -1,3 +1,19 @@
+.fork-banner {
+  border: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 11;
+}
+
+.toolbar-controls {
+  float: right;
+  display: -webkit-box;
+  -webkit-box-align: center;
+  height: 100%;
+  padding-right: 120px;
+}
+
 .toolbar-item.pagespeed-panel .toolbar-icon {
   background-image: url(../img/pagespeed-devtools-icon.png);
 }
@@ -103,7 +119,7 @@
 .fork,
 .sample {
   padding: 0.5em 1em;
-  border: 1px solid #D4D4D4;
+  border: 1px solid #d4d4d4;
   margin: 0 15px 0 0;
   text-decoration: none;
   text-align: center;
