@@ -1,0 +1,19 @@
+{
+  "name": "chromeHar",
+  "description": "Simple Webkit/Chrome like HAR Viewer",
+  "version": "1.0.0",
+  "author": "Eric J. Duran",
+  "homepage": "http://ericduran.github.com/chromeHAR/",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ericduran/chromeHAR.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ericduran/chromeHAR/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "0.4.0rc5",
+    "grunt-contrib-jshint": "0.1.1rc6"
+  }
+}

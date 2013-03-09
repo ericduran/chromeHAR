@@ -1,0 +1,27 @@
+{
+  "curly": true,
+  "eqeqeq": true,
+  "expr": true,
+  "newcap": false,
+  "quotmark": "double",
+  "regexdash": true,
+  "trailing": true,
+  "undef": true,
+  "unused": true,
+  "maxerr": 100,
+
+  "eqnull": true,
+  "evil": true,
+  "sub": true,
+
+  "browser": true,
+  "jquery": true,
+
+  "predef": [
+    "$",
+    "Angular",
+    "define",
+    "Modernizr",
+    "module"
+  ]
+}
