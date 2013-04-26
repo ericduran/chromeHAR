@@ -22,7 +22,7 @@ var HAREntry = (function HAREntryClosure() {
     this.status = this._entry.response.status;
     this.statusText = this._entry.response.statusText;
     this.mimeType = this._entry.response.content.mimeType;
-    this.receive = this._entry.timings.receive;
+    this.receive = this.getReceive();
     this.receiveTime = this._entry.timings.receive + "ms";
 
     // Request
@@ -117,6 +117,13 @@ var HAREntry = (function HAREntryClosure() {
       }
       return 0;
 
+    },
+
+    getReceive: function() {
+      if (this._entry.timings && this._entry.timings.receive != undefined) {
+        return this._entry.timings.receive;
+      }
+      return 0;
     },
 
     prepRequest: function () {
