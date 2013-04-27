@@ -1,0 +1,14 @@
+{
+  "name": "angular",
+  "version": "1.0.6",
+  "main": "./angular.js",
+  "dependencies": {},
+  "gitHead": "463e638a6eaf523c1e41210a40951683a83e0ecd",
+  "_id": "AngularJS@1.0.6",
+  "readme": "ERROR: No README.md file found!",
+  "description": "ERROR: No README.md file found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/angular/bower-angular.git"
+  }
+}
