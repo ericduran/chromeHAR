@@ -7,8 +7,7 @@ angular.module('net', ['net.dnd']).controller('NetworkCtrl', function ($scope) {
   $scope.entries = $scope.entries || [];
   $scope.data = '';
   $scope.startedTime = '';
-  $scope.pageTimings = '';
-  $scope.pageTimings.section = '';
+  $scope.pageTimings = {};
   $scope.checked = false;
   $scope.tab = '1';
   $scope.sI = 'all';
