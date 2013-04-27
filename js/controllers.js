@@ -99,7 +99,16 @@ angular.module('net', ['net.dnd']).controller('NetworkCtrl', function ($scope) {
     $scope.tab = index;
   };
 
-  $scope.drop = function ($event) {
+  $scope.dnd = {};
+
+  $scope.dnd.cancel = function (e) {
+    if (e.preventDefault) {
+      e.preventDefault(); // required by FF + Safari
+    }
+    return false; // required by IE
+  }
+
+  $scope.dnd.drop = function ($event) {
     var e, file, reader, data;
     $event.preventDefault();
     $event.stopPropagation();
