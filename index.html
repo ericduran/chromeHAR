@@ -119,7 +119,8 @@
                   </tbody>
                 </table>
 
-                <div class="data-container">
+                <div class="data-container" ng-repeat="page in pages">
+                  <div class="page-wrapper">
                   <table class="data">
                     <colgroup span="7">
                       <col class="first">
@@ -130,14 +131,19 @@
                       <col class="six">
                       <col class="sev">
                     </colgroup>
+                    <thead ng-show="checked">
+                      <tr class="revealed page-summary-bar">
+                        <td colspan="7">{{page.id}} {{page.title}}</td>
+                      </tr>
+                    </thead>
                     <tfoot ng-show="checked">
                       <tr class="revealed network-summary-bar">
                         <!-- FixMe: This always assume ms -->
-                        <td colspan="7">{{data.count}} requests  ❘  {{transfer}} transferred  ❘  <!-- TODO: Need the time here; --> (onload: {{pageTimings.onLoad}}ms, DOMContentLoaded: {{pageTimings.onContentLoad}}ms)</td>
+                        <td colspan="7">{{page.count}} requests  ❘  {{page.transfer}} transferred  ❘  <!-- TODO: Need the time here; --> (onload: {{page.pageTimings.onLoad}}ms, DOMContentLoaded: {{page.pageTimings.onContentLoad}}ms)</td>
                       </tr>
                     </tfoot>
                     <tbody>
-                      <tr ng-class="getSelectedRow($index)" class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in entries | filter:query | filter:type | orderBy:predicate:reverse">
+                      <tr ng-class="getSelectedRow($index)" class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in page.entries | filter:query | filter:type | orderBy:predicate:reverse">
                         <td class="name-column" ng-click="showDetails($index)"><div title="{{entry.url}}"><img class="icon">{{entry.parsedURL.lastPathComponent}}<div class="network-cell-subtitle">{{entry.folder}}</div></div></td>
                         <td class="method-column"><div title="{{entry.method}}">{{entry.method}}</div></td>
                         <td class="status-column"><div title="{{entry.status}} {{entry.statusText}}">{{entry.status}}<div class="network-cell-subtitle">{{entry.statusText}}</div></div></td>
@@ -148,7 +154,7 @@
                           <div class="network-graph-side network-type-{{entry.name}}">
                             <div class="network-graph-bar-area">
                               <div class="network-graph-bar waiting" style="left: {{entry.graphs.latency_left}}%; right: {{entry.graphs.latency_right}}%;" title=""></div>
-                              <div class="network-graph-bar" style="left: {{entry.graphs.receiving_left}}%;  right: {{100.0 - ((entry.request.startTime - startedTime + (entry._entry.time - entry.timings.receive ) )/pageTimings.onLoad * 100)}}%;" title=""></div>
+                              <div class="network-graph-bar" style="left: {{entry.graphs.receiving_left}}%;  right: {{entry.graphs.receiving_right}}%;" title=""></div>
                               <div class="network-graph-label waiting" title="">{{entry.latency}}</div>
                               <div class="network-graph-label after" title="">{{entry.receiveTime}}</div>
                             </div>
@@ -167,7 +173,6 @@
                       </tr>
                     </tbody>
                   </table>
-                </div>
                 <div class="network-timeline-grid" ng-show="checked">
                   <div id="resources-graphs"></div>
                     <div class="resources-dividers">
@@ -185,10 +190,10 @@
                       <div class="resources-divider last" style="left: 100%; "></div>
                     </div>
                     <div class="resources-event-dividers">
-                      <div class="network-event-divider-padding" title="Load event fired" style="left: 100%; ">
+                      <div class="network-event-divider-padding" title="Load event fired" style="left: {{page.load_event_left}}%; ">
                         <div class="network-event-divider network-red-divider"></div>
                       </div>
-                      <div class="network-event-divider-padding" title="DOMContent event fired" style="left: {{pageTimings.onContentLoad/pageTimings.onLoad * 100}}%; ">
+                      <div class="network-event-divider-padding" title="DOMContent event fired" style="left: {{page.content_load_left}}%; ">
                         <div class="network-event-divider network-blue-divider"></div>
                       </div>
                     </div>
@@ -230,6 +235,8 @@
                         <div class="resources-divider-label">{{labels.12}}</div>
                       </div>
                     </div>
+                </div>
+                </div>
                 </div>
               </div>
             </div>
