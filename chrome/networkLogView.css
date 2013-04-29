@@ -11,6 +11,7 @@
 .network-log-grid.data-grid table.data {
     -webkit-background-size: 1px 82px;
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(0.5, rgba(0, 0, 0, 0)), color-stop(0.5, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.05)));
+    background-position: 0px 20px;
     font-size: 11px;
 }
 
@@ -392,8 +393,8 @@
 
 .network-timeline-grid {
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: -12px;
+    bottom: 20px;
     left: 0;
     right: 0;
     pointer-events: none;
@@ -445,7 +446,7 @@
 .network-timeline-grid .resources-divider-label {
     top: 0px;
     margin-top: -4px;
-    color: black;
+    color: white;
 }
 
 .network-timeline-grid .resources-dividers-label-bar .resources-divider {
@@ -489,7 +490,6 @@
 }
 
 .network-log-grid.data-grid .network-summary-bar {
-    position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
