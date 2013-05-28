@@ -58,8 +58,7 @@
 }
 
 .network-timeline-grid {
-  left: 54%;
-  right: 18px;
+  left: 55.0701262272089770%; /* Horribly broken see issue #15 */
 }
 
 .split-view-network-views,
@@ -139,4 +138,31 @@
   background-clip: padding-box;
   border-radius: 0.2em;
   zoom: 1;
+}
+
+.network-log-grid.data-grid .page-summary-bar {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-right: -14px;
+    background-color: rgb(101, 111, 130);
+}
+
+.network-log-grid.data-grid .page-summary-bar td {
+    color: white;
+    height: 20px !important;
+    border: none;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0 0 0 8px;
+    white-space: pre;
+    overflow : hidden;
+    text-overflow : ellipsis;
+}
+
+.page-wrapper {
+  position: relative;
+  top: 0px;
+  bottom: 0px;
+  height: 100%;
 }
