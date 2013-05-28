@@ -14,7 +14,7 @@ var HAREntry = (function HAREntryClosure() {
    * A single entry request.
    * @constructor
    */
-  function HAREntry(entry, id, data) {
+  function HAREntry(entry, id, start_time, data) {
     this._entry = entry;
     this._id = id;
 
@@ -23,7 +23,7 @@ var HAREntry = (function HAREntryClosure() {
     this.statusText = this._entry.response.statusText;
     this.mimeType = this._entry.response.content.mimeType;
     this.receive = this.getReceive();
-    this.receiveTime = this._entry.timings.receive + "ms";
+    this.receiveTime = this.receive + "ms";
 
     // Request
     this.url = this._entry.request.url;
@@ -46,9 +46,8 @@ var HAREntry = (function HAREntryClosure() {
     this.resHeadersCount = this._entry.response.headers.length;
 
     // Extra from data.
-    this.startedTime = new Date(data.log.pages[0].startedDateTime).getTime();
+    this.startedTime = start_time;
     this.graphs = this.graphs(data);
-    // this.startedDateTime = new Date(this._request.startTime * 1000);
 
     // Raw values for Sort and Filters.
     this.nameSort = this.parsedURL.lastPathComponent;
@@ -139,14 +138,14 @@ var HAREntry = (function HAREntryClosure() {
 
     graphs: function (data) {
       var graph = {};
-      graph.pOL = data.log.pages[0].pageTimings.onLoad;
+      graph.pOL = data.lastOnLoad;
       graph.lOR = this.request.startTime - this.startedTime;
       graph.Lat = this._entry.time - this.receive;
       graph.end = this._entry.time + this.receive;
       graph.latency_left = (graph.lOR  / graph.pOL) * 100;
       graph.latency_right =  100 - (((graph.lOR + graph.Lat) / graph.pOL) * 100);
       graph.receiving_left = ((graph.lOR + graph.Lat)  / graph.pOL) * 100;
-      graph.receiving_right = ''; // TODO: Fixme
+      graph.receiving_right = 100.0 - ((graph.lOR + this._entry.time)/graph.pOL * 100);
       return graph;
     }
   };
