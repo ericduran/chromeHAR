@@ -1,19 +1,26 @@
 #Chrome HAR Viewer#
 -
 
+# Building
+
+```npm install && bower install && grunt server```
+
+
 ##Description##
 
-An attemp at building a HAR viewer that mimics [Chrome Dev Tools](https://developers.google.com/chrome-developer-tools/docs/overview)
+A HAR viewer that mimics [Chrome Dev Tools Network Panel](https://developers.google.com/chrome-developer-tools/docs/network)
+
+
+## Current Features
+ - Multiple Page HAR File Support
+ - Drag and Drop HAR File
 
 
 ###Missing Features
- - Timing Detail View
- - TimeLine Sorting (Start Time, Response Time, End Time, Duration, Latency)
- - Page Speed API (Need to check if pagespeed allows this but it'll be nice.)
- - User Settings (I'm not quiet sure what to put in there yet)
- - Bottom Info - (# of Request, Transfer size, etc..)
- - Offline Support
- - A bunch of things I missed
+ [] Timing Detail View
+ [] TimeLine Sorting (Start Time, Response Time, End Time, Duration, Latency)
+ [] Page Speed API (Need to check if pagespeed allows this but it'll be nice.)
+ [] User Settings (I'm not quiet sure what to put in there yet)
+ [] Bottom Info - (# of Request, Transfer size, etc..)
+ [] Off line Support
 
-###Known Bugs
- - Probably a lot.
