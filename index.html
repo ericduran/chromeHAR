@@ -30,6 +30,10 @@
 
   <div id="toolbar">
     <div class="toolbar-controls">
+      <div class="toolbar-item" id="toolbar-load-item">
+        <label class="file-label">Load local HAR</label>
+        <file name="har" ng-model="inputFile" accept="*" />
+      </div>
       <div class="toolbar-item" id="toolbar-sample-item">
         <a href="#" class="sample">Load sample HAR</a>
       </div>

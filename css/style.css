@@ -140,6 +140,11 @@
   zoom: 1;
 }
 
+.file-label {
+  font-size: 1.3em;
+  padding-right: 5px;
+}
+
 .network-log-grid.data-grid .page-summary-bar {
     left: 0;
     right: 0;
