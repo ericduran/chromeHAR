@@ -2,14 +2,14 @@
  * Network Tab Controller.
  */
 
-(function(ng) {
+(function(ng, $) {
+  'use strict';
 
   // Yo, ng === angular FYI :-p I don't like typing "angular" so much.
   var cH = ng.module('net', ['net']);
 
   // Network Controller.
   cH.controller('NetworkCtrl', function ($scope) {
-    'use strict';
 
     $scope.segments = 12; // Hard-coded number of segments
     $scope.pages = $scope.pages || []; // Page -> Entry mapping
@@ -21,32 +21,32 @@
     $scope.sI = 'all';
     $scope.selectedEntry = null;
 
-    $scope.updateHar = function(new_data) {
+    $scope.updateHar = function(newData) {
       // Reset data
       var data = {};
       data.lastOnLoad = 0;
 
-      // Handle pages
-      var pages = new_data.log.pages;
+      // Handle pages.
+      var pages = newData.log.pages;
       var pageidxs = {};
       $.each(pages, function(i, pg) {
         pageidxs[pg.id] = i;
         pg.startTime = new Date(pg.startedDateTime).getTime();
-        // Set last onLoad (upper bound on scale)
-        if( !data.lastOnLoad || data.lastOnLoad < pg.pageTimings.onLoad ) {
-           data.lastOnLoad = pg.pageTimings.onLoad;
+        // Set last onLoad (upper bound on scale).
+        if (!data.lastOnLoad || data.lastOnLoad < pg.pageTimings.onLoad ) {
+          data.lastOnLoad = pg.pageTimings.onLoad;
         }
         pg.transfer = 0; // Reset transfer size
       });
 
       // Handle entries
-      var entries = new_data.log.entries;
-      delete new_data.log.entries;
+      var entries = newData.log.entries;
+      delete newData.log.entries;
       $.each(entries, function(i, entry) {
         var pg = pages[pageidxs[entry.pageref]];
         entries[i] = new HAREntry(entry, i, pg.startTime, data);
-        if( !pg.entries ) {
-           pg.entries = [];
+        if (!pg.entries) {
+          pg.entries = [];
         }
         pg.entries.push(entries[i]); // Record reference
         pg.transfer += entries[i].getRawContentSize();
@@ -55,14 +55,15 @@
       $.each(pages, function(i, pg) {
         pg.transfer = Number.bytesToString(pg.transfer);
         pg.count = 0;
-        if( pg.entries ) {
-           pg.count = pg.entries.length;
+        if (pg.entries) {
+          pg.count = pg.entries.length;
         }
-        pg.load_event_left = (pg.pageTimings.onLoad/data.lastOnLoad)*100;
-        if( pg.pageTimings.onContentLoad ){
-           pg.content_load_left = (pg.pageTimings.onContentLoad/data.lastOnLoad)*100;
-        } else {
-           pg.content_load_left = 0;
+        pg.loadEventLeft = (pg.pageTimings.onLoad/data.lastOnLoad) * 100;
+        if (pg.pageTimings.onContentLoad) {
+          pg.contentLoadLeft = (pg.pageTimings.onContentLoad/data.lastOnLoad)*100;
+        }
+        else {
+          pg.contentLoadLeft = 0;
         }
       });
 
@@ -246,4 +247,4 @@
     }
   });
 
-})(angular);
+})(angular, jQuery);
