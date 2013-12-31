@@ -101,9 +101,9 @@
       $('.response.children').toggleClass('expanded');
     };
 
-    $scope.showDetails = function(i) {
+    $scope.showDetails = function(i, entry) {
       $scope.selectedRow = i;
-      $scope.selectedEntry = $scope.entries[i];
+      $scope.selectedEntry = entry;
 
       var $leftView = $('.split-view-sidebar-left');
       $('#network-views').removeClass('hidden');

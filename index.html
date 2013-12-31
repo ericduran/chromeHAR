@@ -147,7 +147,7 @@
                     </tfoot>
                     <tbody>
                       <tr ng-class="getSelectedRow($index)" class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in page.entries | filter:query | filter:type | orderBy:predicate:reverse">
-                        <td class="name-column" ng-click="showDetails($index)"><div title="{{entry.url}}"><img class="icon">{{entry.parsedURL.lastPathComponent}}<div class="network-cell-subtitle">{{entry.folder}}</div></div></td>
+                        <td class="name-column" ng-click="showDetails($index, entry)"><div title="{{entry.url}}"><img class="icon">{{entry.parsedURL.lastPathComponent}}<div class="network-cell-subtitle">{{entry.folder}}</div></div></td>
                         <td class="method-column"><div title="{{entry.method}}">{{entry.method}}</div></td>
                         <td class="status-column"><div title="{{entry.status}} {{entry.statusText}}">{{entry.status}}<div class="network-cell-subtitle">{{entry.statusText}}</div></div></td>
                         <td class="type-column"><div title="{{entry.mimeType}}">{{entry.mimeType}}</div></td>
@@ -243,6 +243,7 @@
                     <div ng-click="showTab(1)" ng-class="getTab(1)" class="tabbed-pane-header-tab selected"><span class="tabbed-pane-header-tab-title" title="">Headers</span></div>
                     <div ng-click="showTab(2)" ng-class="getTab(2)" class="tabbed-pane-header-tab"><span class="tabbed-pane-header-tab-title" title="">Cookies</span></div>
                     <div ng-click="showTab(3)" ng-class="getTab(3)" class="tabbed-pane-header-tab"><span class="tabbed-pane-header-tab-title" title="">Timing</span></div>
+                    <div ng-click="showTab(4)" ng-class="getTab(4)" class="tabbed-pane-header-tab"><span class="tabbed-pane-header-tab-title" title="">Content</span></div>
                   </div>
                 </div>
               </div>
@@ -386,6 +387,9 @@
                       </td>
                     </tr>
                   </table>
+                </div>
+                <div ng-class="getVisibleTab(4)" class="resource-timing-view">
+                  <p><pre>{{selectedEntry._entry.response.content.text}}</pre></p>
                 </div>
               </div>
             </div>
