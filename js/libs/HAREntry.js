@@ -31,6 +31,9 @@ var HAREntry = (function HAREntryClosure() {
 
     // Custom
     this.parsedURL = new WebInspector.ParsedURL(entry.request.url);
+    if (!this.parsedURL.lastPathComponent && this.parsedURL.url.indexOf('?') > -1) {
+      this.parsedURL.lastPathComponent = '?' + this.parsedURL.queryParams;
+    }
     this.name = this.getRequestName();
     this.folder = this.getFolder();
     this.size = this.getSize();
