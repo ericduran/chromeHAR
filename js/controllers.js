@@ -82,7 +82,7 @@
       var labels = {};
       for (var i = 12; i > 0; i--) {
         labels[i] = String.sprintf("%0.00fms", section * i);
-      };
+      }
       return labels;
     };
 
@@ -151,7 +151,7 @@
         e.preventDefault(); // required by FF + Safari
       }
       return false; // required by IE
-    }
+    };
 
     $scope.$watch('inputFile', function(e) {
       if ($scope.inputFile !== undefined) {
@@ -169,7 +169,7 @@
             // For now lets just throw an alert.
             alert('Unsupported file type.');
           }
-        }
+        };
         reader.readAsText(file);
       }
     });
@@ -193,7 +193,7 @@
           // For now lets just throw an alert.
           alert('Unsupported file type.');
         }
-      }
+      };
       reader.readAsText(file);
       return false;
     };
@@ -210,7 +210,6 @@
    */
   ['Dragstart', 'Drag', 'Dragenter', 'Dragleave', 'Dragover', 'Drop', 'Dragend'].forEach(
     function(name) {
-      'use strict';
       var directiveName = 'dnd' + name;
       cH.directive(directiveName, ['$parse', function($parse, $scope) {
         return function(scope, element, attr) {
@@ -241,10 +240,10 @@
           scope.$apply(function() {
             attr.multiple ? ctrl.$setViewValue(element[0].files) : ctrl.$setViewValue(element[0].files[0]);
           });
-        }
+        };
         element.bind('change', listener);
       }
-    }
+    };
   });
 
 })(angular, jQuery);
