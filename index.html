@@ -58,14 +58,14 @@
           <div class="glyph"></div><div class="glyph shadow"></div>
         </button>
         <div class="scope-bar status-bar-item" id="network-filter">
-          <li ng-class="getClass('all')" class="all" ng-click="type.mimeType='';sI='all'">All</li>
+          <li ng-class="getClass('all')" class="all" ng-click="sI='all'">All</li>
           <div class="scope-bar-divider"></div>
-          <li ng-class="getClass('doc')" class="document" ng-click="type.mimeType='text/html';sI='doc'">Documents</li>
-          <li ng-class="getClass('css')" class="stylesheet" ng-click="type.mimeType='text/css';sI='css'">Stylesheets</li>
-          <li ng-class="getClass('img')" class="image" ng-click="type.mimeType='image/';sI='img'">Images</li>
-          <li ng-class="getClass('js')" class="script" ng-click="type.mimeType='text/javascript';sI='js'">Scripts</li>
-          <li ng-class="getClass('xhr')" class="xhr" ng-click="type.mimeType='application/x-javascript';sI='xhr'">XHR</li>
-          <li ng-class="getClass('fnt')" class="font" ng-click="type.mimeType='application/octet-stream';sI='fnt'">Fonts</li>
+          <li ng-class="getClass('doc')" class="document" ng-click="sI='doc'">Documents</li>
+          <li ng-class="getClass('css')" class="stylesheet" ng-click="sI='css'">Stylesheets</li>
+          <li ng-class="getClass('img')" class="image" ng-click="sI='img'">Images</li>
+          <li ng-class="getClass('js')" class="script" ng-click="sI='js'">Scripts</li>
+          <li ng-class="getClass('xhr')" class="xhr" ng-click="sI='xhr'">XHR</li>
+          <li ng-class="getClass('fnt')" class="font" ng-click="sI='fnt'">Fonts</li>
           <li ng-class="getClass('sck')" class="websocket" ng-click="sI='sck'">WebSockets</li>
           <li ng-class="getClass('oth')" class="other" ng-click="sI='oth'">Other</li>
         </div>
@@ -146,7 +146,7 @@
                       </tr>
                     </tfoot>
                     <tbody>
-                      <tr ng-class="getSelectedRow($index)" class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in page.entries | filter:query | filter:type | orderBy:predicate:reverse">
+                      <tr ng-class="getSelectedRow($index)" class="revealed network-item network-type-{{entry.name}}" data-id="{{entry.id}}" ng-repeat="entry in page.entries | filter:query | filter:typeFilter | orderBy:predicate:reverse">
                         <td class="name-column" ng-click="showDetails($index)" title="{{entry.url}}"><div><img class="icon">{{entry.parsedURL.lastPathComponent}}<div class="network-cell-subtitle">{{entry.folder}}</div></div></td>
                         <td class="method-column"><div title="{{entry.method}}">{{entry.method}}</div></td>
                         <td class="status-column" title="{{entry.status}} {{entry.statusText}}"><div>{{entry.status}}<div class="network-cell-subtitle">{{entry.statusText}}</div></div></td>
