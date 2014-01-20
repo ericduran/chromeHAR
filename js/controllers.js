@@ -123,6 +123,42 @@
       $('#network-container').removeClass('brief-mode');
     };
 
+    $scope.typeFilter = function(entry) {
+      var mt = entry.mimeType;
+
+      var isDoc = mt === 'text/html' || mt === 'text/plain';
+      var isCSS = mt === 'text/css';
+      var isImage = mt.substr(0, 6) === 'image/';
+      var isJS = /\/javascript/.test(mt);
+      var isXHR = /\/json/.test(mt) || mt === 'application/x-javascript';
+      var isFont = (/(\/|-)font-/.test(mt) ||
+                    /\/font/.test(mt) ||
+                    mt.substr(0, 5) === 'font/' ||
+                    /\.((eot)|(otf)|(ttf)|(woff))($|\?)/.test(entry.url));
+
+      switch ($scope.sI) {
+        case 'all':
+          return true;
+        case 'doc':
+          return isDoc;
+        case 'css':
+          return isCSS;
+        case 'img':
+          return isImage;
+        case 'js':
+          return isJS;
+        case 'xhr':
+          return isXHR;
+        case 'fnt':
+          return isFont;
+        case 'sck':
+          return false;
+        case 'oth':
+        default:
+          return !(isDoc || isCSS || isImage || isJS || isXHR || isFont);
+      }
+    };
+
     // TODO: merge all these get/set index functions.
     $scope.getClass = function (type) {
       return ( (type == $scope.sI) ? 'selected' : '');
