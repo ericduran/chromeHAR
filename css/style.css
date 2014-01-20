@@ -195,8 +195,14 @@
 }
 
 .page-wrapper {
-  position: relative;
-  top: 0px;
-  bottom: 0px;
+  bottom: 0;
+  display: none;
   height: 100%;
+  position: relative;
+  top: 0;
+}
+
+/* Show the main table cells when the drag-and-drop area disappears */
+#dropArea:not(.visible) ~ #main .page-wrapper {
+  display: block;
 }
