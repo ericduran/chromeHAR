@@ -9,7 +9,7 @@
   var cH = ng.module('net', ['net']);
 
   // Network Controller.
-  cH.controller('NetworkCtrl', function ($scope) {
+  cH.controller('NetworkCtrl', function ($scope, $location, $window) {
 
     $scope.segments = 12; // Hard-coded number of segments
     $scope.pages = $scope.pages || []; // Page -> Entry mapping
@@ -234,6 +234,17 @@
       return false;
     };
 
+    // Load HAR from `url` query-string parameter.
+    var qsURL = /[\?&]url=(.*)/i.exec($window.location.search);
+    qsURL = (qsURL ? qsURL[1] : '').toLowerCase();
+    if (qsURL) {
+      $.getJSON(qsURL, function(data) {
+        $('#dropArea').removeClass('visible');
+        $scope.$apply(function() {
+          $scope.updateHar(data);
+        });
+      });
+    }
   });
 
 
