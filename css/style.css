@@ -1,3 +1,32 @@
+.tabbed-pane-content a {
+  border-bottom: 1px solid #def;
+  color: #0074d9;
+  padding-bottom: 1px;
+  text-decoration: none;
+  transition: border-bottom-color .2s ease-in-out, color .2s ease-in-out;
+}
+
+.tabbed-pane-content a:visited {
+  border-bottom-color: #fde;
+  color: #b10dc9;
+}
+
+.tabbed-pane-content a:visited:hover {
+  border-bottom-color: #f9c;
+  color: #870a99;
+}
+
+.tabbed-pane-content a:hover {
+  border-bottom-color: #9cf;
+  color: #005095;
+}
+
+.tabbed-pane-content a:active,
+.tabbed-pane-content a:visited:active {
+  border-bottom-color: #fc9;
+  color: #ff851b;
+}
+
 .fork-banner {
   border: 0;
   position: absolute;
