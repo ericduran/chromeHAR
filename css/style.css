@@ -27,7 +27,7 @@
   color: #ff851b;
 }
 
-.fork-banner {
+.fork-banner img {
   border: 0;
   position: absolute;
   right: 0;
@@ -205,4 +205,22 @@
 /* Show the main table cells when the drag-and-drop area disappears */
 #dropArea:not(.visible) ~ #main .page-wrapper {
   display: block;
+}
+
+.iframed #toolbar {
+  height: 30px;
+}
+
+.iframed #main {
+  top: 30px;
+}
+
+.iframed .fork-banner,
+.iframed .toolbar-item.network,
+.iframed #toolbar-sample-item * {
+  display: none;
+}
+
+.iframed .toolbar-controls {
+  padding-right: 0;
 }

@@ -5,6 +5,19 @@
 (function(ng, $) {
   'use strict';
 
+  // Load HAR from `url` query-string parameter.
+  var qsURL = /[\?&]url=(.*)/i.exec(window.location.search);
+  qsURL = qsURL ? qsURL[1] : '';
+  if (qsURL) {
+    // If the page is iframed w/ an external HAR, disallow uploading a local
+    // HAR file, the sample HAR button, and the GitHub banner. Instead,
+    // replace the contents with the URL to the external HAR.
+    if (window.top !== window.self) {
+      $('body').addClass('iframed');
+      $('#toolbar-load-item').text(qsURL);
+    }
+  }
+
   function getType(ct, url) {
     ct = ct.toLowerCase();
     if (ct.substr(0, 8) === 'text/css') {
@@ -250,8 +263,6 @@
     };
 
     // Load HAR from `url` query-string parameter.
-    var qsURL = /[\?&]url=(.*)/i.exec($window.location.search);
-    qsURL = qsURL && qsURL[1];
     if (qsURL) {
       $.getJSON(qsURL, function(data) {
         $('#dropArea').removeClass('visible');
