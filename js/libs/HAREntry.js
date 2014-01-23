@@ -31,8 +31,14 @@ var HAREntry = (function HAREntryClosure() {
 
     // Custom
     this.parsedURL = new WebInspector.ParsedURL(entry.request.url);
-    if (!this.parsedURL.lastPathComponent && this.parsedURL.url.indexOf('?') > -1) {
-      this.parsedURL.lastPathComponent = '?' + this.parsedURL.queryParams;
+    if (!this.parsedURL.lastPathComponent) {
+      if (this.parsedURL.url.indexOf('?') > -1) {
+        // Show the querystring parameters.
+        this.parsedURL.lastPathComponent = '?' + this.parsedURL.queryParams;
+      } else {
+        // Show the the hostname.
+        this.parsedURL.lastPathComponent = this.parsedURL.host;
+      }
     }
     this.name = this.getRequestName();
     this.folder = this.getFolder();
