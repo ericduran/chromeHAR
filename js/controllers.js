@@ -5,6 +5,38 @@
 (function(ng, $) {
   'use strict';
 
+  function getType(ct, url) {
+    ct = ct.toLowerCase();
+    if (ct.substr(0, 8) === 'text/css') {
+      return 'css';
+    }
+    if (/javascript/.test(ct)) {
+      return 'js';
+    }
+    if (/\/json/.test(ct)) {
+      return 'xhr';
+    }
+    if (ct.substr(0, 5) === 'font/' ||
+        /(\/|-)font-/.test(ct) || /\/font/.test(ct) ||
+        /\.((eot)|(otf)|(ttf)|(woff))($|\?)/i.test(url)) {
+      return 'fnt';
+    }
+    if (ct.substr(0, 6) === 'image/' ||
+        /\.((gif)|(png)|(jpe)|(jpeg)|(jpg)|(tiff))($|\?)/i.test(url)) {
+      return 'img';
+    }
+    if (ct.substr(0, 6) === 'audio/' || ct.substr(0, 6) === 'video/' ||
+        /\.((flac)|(ogg)|(opus)|(mp3)|(wav)|(weba))($|\?)/i.test(url) ||
+        /\.((mp4)|(webm))($|\?)/i.test(url)) {
+      return 'oth';
+    }
+    if (ct.substr(0, 9) === 'text/html' ||
+        ct.substr(0, 10) === 'text/plain') {
+      return 'doc';
+    }
+    return 'oth';
+  }
+
   // Yo, ng === angular FYI :-p I don't like typing "angular" so much.
   var cH = ng.module('net', ['net']);
 
@@ -124,38 +156,21 @@
     };
 
     $scope.typeFilter = function(entry) {
-      var mt = entry.mimeType;
-
-      var isDoc = mt === 'text/html' || mt === 'text/plain';
-      var isCSS = mt === 'text/css';
-      var isImage = mt.substr(0, 6) === 'image/';
-      var isJS = /\/javascript/.test(mt);
-      var isXHR = /\/json/.test(mt) || mt === 'application/x-javascript';
-      var isFont = (/(\/|-)font-/.test(mt) ||
-                    /\/font/.test(mt) ||
-                    mt.substr(0, 5) === 'font/' ||
-                    /\.((eot)|(otf)|(ttf)|(woff))($|\?)/.test(entry.url));
+      var type = getType(entry.mimeType, entry.url);
 
       switch ($scope.sI) {
         case 'all':
           return true;
-        case 'doc':
-          return isDoc;
-        case 'css':
-          return isCSS;
-        case 'img':
-          return isImage;
-        case 'js':
-          return isJS;
-        case 'xhr':
-          return isXHR;
-        case 'fnt':
-          return isFont;
         case 'sck':
           return false;
+        case 'doc':
+        case 'css':
+        case 'img':
+        case 'js':
+        case 'xhr':
+        case 'fnt':
         case 'oth':
-        default:
-          return !(isDoc || isCSS || isImage || isJS || isXHR || isFont);
+          return type === $scope.sI;
       }
     };
 
@@ -236,7 +251,7 @@
 
     // Load HAR from `url` query-string parameter.
     var qsURL = /[\?&]url=(.*)/i.exec($window.location.search);
-    qsURL = (qsURL ? qsURL[1] : '').toLowerCase();
+    qsURL = qsURL && qsURL[1];
     if (qsURL) {
       $.getJSON(qsURL, function(data) {
         $('#dropArea').removeClass('visible');
