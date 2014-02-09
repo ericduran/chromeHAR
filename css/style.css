@@ -1,3 +1,7 @@
+* {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
 .tabbed-pane-content a {
   border-bottom: 1px solid #def;
   color: #0074d9;
@@ -37,8 +41,12 @@
 
 .toolbar-controls {
   float: right;
+  display:-moz-box;
   display: -webkit-box;
+  -ms-flex-pack:center;
+  -moz-box-align:center;
   -webkit-box-align: center;
+  box-align:center;
   height: 100%;
   padding-right: 120px;
 }

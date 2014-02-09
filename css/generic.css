@@ -1,0 +1,43 @@
+/* Overrite Webkit specific css properties with generic ones */
+* {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+#toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  padding: 0 5px;
+  border-bottom: 1px solid rgb(80, 80, 80);
+
+
+  background-image: -moz-linear-gradient(top, #bfbfbf 0%, #979797 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(191, 191, 191)), to(rgb(151, 151, 151)));
+  background-image: linear-gradient(to bottom, #bfbfbf 0%,#979797 100%);
+
+  -moz-box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  box-orient: horizontal;
+
+   -moz-background-origin: padding;
+  -webkit-background-origin: padding;
+  background-origin: padding;
+
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding;
+}
+
+.toolbar-item.network .toolbar-icon {
+  background-position: -64px 0;
+}
+
+.network-log-grid.data-grid th, .network-log-grid.data-grid th.sort-descending, .network-log-grid.data-grid th.sort-ascending {
+  background: -moz-linear-gradient(top, #ececec 0%, #d9d9d9 100%);
+  background: -ms-linear-gradient(top, #ececec 0%,#d9d9d9 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgb(236, 236, 236)), to(rgb(217, 217, 217)));
+  background: linear-gradient(to bottom, #ececec 0%,#d9d9d9 100%);
+}
+
