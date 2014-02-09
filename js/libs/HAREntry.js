@@ -101,7 +101,7 @@ var HAREntry = (function HAREntryClosure() {
         return Number.bytesToString(this._entry.response.headersSize);
       }
 
-      return Number.bytesToString(this._entry.request.headersSize + this._entry.request.bodySize);
+      return Number.bytesToString(this._entry.response.headersSize + this._entry.response.bodySize);
     },
 
     getContentSize: function () {
