@@ -378,10 +378,18 @@
                 <div ng-class="getVisibleTab(3)" class="resource-timing-view">
                   <table>
                     <tr>
+                      <td>Waiting</td>
+                      <td width="200px">
+                        <div class="network-timing-row">
+                          <span class="network-timing-bar-title">{{selectedEntry.wait | roundMS:-3}}</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
                       <td>Receiving</td>
                       <td width="200px">
                         <div class="network-timing-row">
-                          <span class="network-timing-bar-title">{{selectedEntry.receive  | roundMS}}</span>
+                          <span class="network-timing-bar-title">{{selectedEntry.receive  | roundMS:-3}}</span>
                         </div>
                       </td>
                     </tr>

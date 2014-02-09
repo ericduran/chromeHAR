@@ -23,6 +23,7 @@ var HAREntry = (function HAREntryClosure() {
     this.statusText = this._entry.response.statusText;
     this.mimeType = this._entry.response.content.mimeType;
     this.receive = this.getReceive();
+    this.wait = this.getWait();
 
     // Request
     this.url = this._entry.request.url;
@@ -129,6 +130,13 @@ var HAREntry = (function HAREntryClosure() {
     getReceive: function() {
       if (this._entry.timings && this._entry.timings.receive != undefined) {
         return this._entry.timings.receive;
+      }
+      return 0;
+    },
+
+    getWait: function() {
+      if (this._entry.timings && this._entry.timings.wait != undefined) {
+        return this._entry.timings.wait;
       }
       return 0;
     },
