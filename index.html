@@ -142,7 +142,7 @@
                     <tfoot ng-show="checked">
                       <tr class="revealed network-summary-bar">
                         <!-- FixMe: This always assume ms -->
-                        <td colspan="7">{{page.count}} requests  ❘  {{page.transfer}} transferred  ❘  <!-- TODO: Need the time here; --> (onload: {{page.pageTimings.onLoad}}ms, DOMContentLoaded: {{page.pageTimings.onContentLoad}}ms)</td>
+                        <td colspan="7">{{page.count}} requests  ❘  {{page.transfer}} transferred  ❘  <!-- TODO: Need the time here; --> (onload: {{page.pageTimings.onLoad  | roundMS}}, DOMContentLoaded: {{page.pageTimings.onContentLoad  | roundMS}})</td>
                       </tr>
                     </tfoot>
                     <tbody>
@@ -152,14 +152,14 @@
                         <td class="status-column" title="{{entry.status}} {{entry.statusText}}"><div>{{entry.status}}<div class="network-cell-subtitle">{{entry.statusText}}</div></div></td>
                         <td class="type-column" title="{{entry.mimeType}}"><div>{{entry.mimeType}}</div></td>
                         <td class="size-column"><div title="{{entry.size}}">{{entry.size}}<div class="network-cell-subtitle" title="{{entry.contentSize}}">{{entry.contentSize}}</div></div></td>
-                        <td class="time-column"><div title="{{entry.time}}">{{entry.time}}<div class="network-cell-subtitle"  title="{{entry.latency}}">{{entry.latency}}</div></div></td>
+                        <td class="time-column"><div title="{{entry.time | roundMS}}">{{entry.time | roundMS}}<div class="network-cell-subtitle"  title="{{entry.latency | roundMS}}">{{entry.latency | roundMS}}</div></div></td>
                         <td class="timeline-column">
                           <div class="network-graph-side network-type-{{entry.name}}">
                             <div class="network-graph-bar-area">
                               <div class="network-graph-bar waiting" style="left: {{entry.graphs.latency_left}}%; right: {{entry.graphs.latency_right}}%;"></div>
                               <div class="network-graph-bar" style="left: {{entry.graphs.receiving_left}}%;  right: {{entry.graphs.receiving_right}}%;"></div>
-                              <div class="network-graph-label waiting" title="{{entry.latency}}">{{entry.latency}}</div>
-                              <div class="network-graph-label after" title="{{entry.receiveTime}}">{{entry.receiveTime}}</div>
+                              <div class="network-graph-label waiting" title="{{entry.latency  | roundMS}}">{{entry.latency  | roundMS}}</div>
+                              <div class="network-graph-label after" title="{{entry.receive  | roundMS}}">{{entry.receive  | roundMS}}</div>
                             </div>
                           </div>
                         </td>
@@ -381,7 +381,7 @@
                       <td>Receiving</td>
                       <td width="200px">
                         <div class="network-timing-row">
-                          <span class="network-timing-bar-title">{{selectedEntry.receiveTime}}</span>
+                          <span class="network-timing-bar-title">{{selectedEntry.receive  | roundMS}}</span>
                         </div>
                       </td>
                     </tr>
