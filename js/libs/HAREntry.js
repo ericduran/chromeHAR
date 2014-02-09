@@ -23,7 +23,6 @@ var HAREntry = (function HAREntryClosure() {
     this.statusText = this._entry.response.statusText;
     this.mimeType = this._entry.response.content.mimeType;
     this.receive = this.getReceive();
-    this.receiveTime = this.receive + "ms";
 
     // Request
     this.url = this._entry.request.url;
@@ -114,14 +113,14 @@ var HAREntry = (function HAREntryClosure() {
 
     getTime: function () {
       if (this._entry.time > 0) {
-        return this._entry.time + "ms";
+        return this._entry.time;
       }
       return 0;
     },
 
     getLatency: function () {
       if (this._entry.time > 0) {
-        return this._entry.time - this._entry.timings.receive + "ms";
+        return this._entry.time - this._entry.timings.receive;
       }
       return 0;
 
