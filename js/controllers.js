@@ -19,6 +19,8 @@
   }
 
   function getType(ct, url) {
+    if (ct == undefined)
+      return 'oth';
     ct = ct.toLowerCase();
     if (ct.substr(0, 8) === 'text/css') {
       return 'css';
@@ -74,6 +76,9 @@
       // Handle pages.
       var pages = newData.log.pages;
       var pageidxs = {};
+
+      // Figure out how long it took to load the entire page.
+      // We'll scale the timeline to match.
       $.each(pages, function(i, pg) {
         pageidxs[pg.id] = i;
         pg.startTime = new Date(pg.startedDateTime).getTime();
@@ -82,6 +87,18 @@
           data.lastOnLoad = pg.pageTimings.onLoad;
         }
         pg.transfer = 0; // Reset transfer size
+      });
+
+      // Often times, page loading continues in the background via ajax
+      // after the initial page load.
+      // Check the individual entries to find determine the last item loaded
+      // and use it to scale the dea
+      $.each(newData.log.entries, function(i, entry) {
+        var startTime = new Date(entry.startedDateTime).getTime();
+        var relativeEndTime = startTime + entry.time - new Date(pages[0].startedDateTime).getTime();
+        if(!data.lastOnLoad || data.lastOnLoad < relativeEndTime) {
+          data.lastOnLoad = relativeEndTime;
+        }
       });
 
       // Handle entries
