@@ -92,7 +92,7 @@
       // Often times, page loading continues in the background via ajax
       // after the initial page load.
       // Check the individual entries to find determine the last item loaded
-      // and use it to scale the dea
+      // and use it to scale the timeline.
       $.each(newData.log.entries, function(i, entry) {
         var startTime = new Date(entry.startedDateTime).getTime();
         var relativeEndTime = startTime + entry.time - new Date(pages[0].startedDateTime).getTime();
