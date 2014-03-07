@@ -96,7 +96,7 @@
       $.each(newData.log.entries, function(i, entry) {
         var startTime = new Date(entry.startedDateTime).getTime();
         var relativeEndTime = startTime + entry.time - new Date(pages[0].startedDateTime).getTime();
-        if(!data.lastOnLoad || data.lastOnLoad < relativeEndTime) {
+        if (!data.lastOnLoad || data.lastOnLoad < relativeEndTime) {
           data.lastOnLoad = relativeEndTime;
         }
       });
