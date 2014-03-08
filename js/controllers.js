@@ -19,8 +19,9 @@
   }
 
   function getType(ct, url) {
-    if (ct === undefined)
+    if (ct === undefined) {
       return 'oth';
+    }
     ct = ct.toLowerCase();
     if (ct.substr(0, 8) === 'text/css') {
       return 'css';
