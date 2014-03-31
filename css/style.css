@@ -56,6 +56,8 @@
 }
 
 #search {
+  position: relative;
+  z-index: 12;
   width: 200px;
 }
 
