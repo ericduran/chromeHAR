@@ -5,6 +5,8 @@
 (function(ng, $) {
   'use strict';
 
+  var fakePage = false;
+
   // Load HAR from `url` query-string parameter.
   var qsURL = /[\?&]url=(.*)/i.exec(window.location.search);
   qsURL = qsURL ? qsURL[1] : '';
@@ -90,13 +92,34 @@
         pg.transfer = 0; // Reset transfer size
       });
 
+      // if lacking page entries (e.g. Fiddler)
+      if (pages.length == 0){
+         pages[0] = fakePage = {};
+         fakePage.startTime = new Date().getTime();
+         fakePage.pageTimings = {
+            onLoad : 0
+         };
+         fakePage.transfer = 0;
+
+        $.each(newData.log.entries, function(i, entry) {
+
+          var startTime = new Date(entry.startedDateTime).getTime();
+          var endTime = startTime + entry.time;
+          fakePage.startTime = Math.min(fakePage.startTime, startTime);
+          fakePage.pageTimings.onLoad = Math.max(fakePage.pageTimings.onLoad, endTime);
+        });
+      }
+
       // Often times, page loading continues in the background via ajax
       // after the initial page load.
       // Check the individual entries to find determine the last item loaded
       // and use it to scale the timeline.
       $.each(newData.log.entries, function(i, entry) {
+
         var startTime = new Date(entry.startedDateTime).getTime();
-        var relativeEndTime = startTime + entry.time - new Date(pages[0].startedDateTime).getTime();
+        var endTime = startTime + entry.time;
+
+        var relativeEndTime = endTime - new Date(pages[0].startedDateTime).getTime();
         if (!data.lastOnLoad || data.lastOnLoad < relativeEndTime) {
           data.lastOnLoad = relativeEndTime;
         }
@@ -106,7 +129,9 @@
       var entries = newData.log.entries;
       delete newData.log.entries;
       $.each(entries, function(i, entry) {
-        var pg = pages[pageidxs[entry.pageref]];
+
+        var pg = fakePage ? fakePage : pages[pageidxs[entry.pageref]];
+
         entries[i] = new HAREntry(entry, i, pg.startTime, data);
         if (!pg.entries) {
           pg.entries = [];
