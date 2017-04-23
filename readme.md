@@ -1,4 +1,3 @@
-[![Code Climate](https://codeclimate.com/github/ericduran/chromeHAR.png)](https://codeclimate.com/github/ericduran/chromeHAR) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ericduran/chromehar/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 # Chrome HAR Viewer
 
