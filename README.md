@@ -8,14 +8,14 @@ HAR viewer that mimics (or at least tries really hard to) Chrome's network tab.
 
 # Building
 
-##Description##
+## Description
 
 A HAR viewer that mimics [Chrome Dev Tools Network Panel](https://developers.google.com/web/tools/chrome-devtools/network-performance/)
 
 
-## Current Features
+###  Current Features
  - None
 
-###Missing Features
+### Missing Features
  - All
 
