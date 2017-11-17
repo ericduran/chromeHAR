@@ -10,7 +10,7 @@ HAR viewer that mimics (or at least tries really hard to) Chrome's network tab.
 ```npm install && bower install && grunt server```
 
 
-##Description##
+**Description**
 
 A HAR viewer that mimics [Chrome Dev Tools Network Panel](https://developers.google.com/chrome-developer-tools/docs/network)
 
@@ -20,7 +20,7 @@ A HAR viewer that mimics [Chrome Dev Tools Network Panel](https://developers.goo
  - Drag and Drop HAR File
 
 
-###Missing Features
+## Missing Features
  - Timing Detail View
  - TimeLine Sorting (Start Time, Response Time, End Time, Duration, Latency)
  - Page Speed API (Need to check if pagespeed allows this but it'll be nice.)
