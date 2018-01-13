@@ -5,6 +5,11 @@ HAR viewer that mimics (or at least tries really hard to) Chrome's network tab.
 
 **[View demo!](https://ericduran.github.com/chromeHAR)**
 
+----
+# CHROME NOW SHIPS WITH THIS FUNCTIONALITY
+See: https://developers.google.com/web/updates/2017/08/devtools-release-notes#har-imports
+----
+
 # Building
 
 ```npm install && bower install && grunt server```
