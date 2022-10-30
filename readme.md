@@ -3,7 +3,7 @@
 
 HAR viewer that mimics (or at least tries really hard to) Chrome's network tab.
 
-**[View demo!](https://ericduran.github.com/chromeHAR)**
+**[View demo!](https://ericduran.github.io/chromeHAR)**
 
 ----
 # CHROME NOW SHIPS WITH THIS FUNCTIONALITY
