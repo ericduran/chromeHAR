@@ -96,7 +96,7 @@
       // and use it to scale the timeline.
       $.each(newData.log.entries, function(i, entry) {
         var startTime = new Date(entry.startedDateTime).getTime();
-        var relativeEndTime = startTime + entry.time - new Date(pages[0].startedDateTime).getTime();
+        var relativeEndTime = startTime + entry.time - new Date(pages[pageidxs[entry.pageref]].startedDateTime).getTime();
         if (!data.lastOnLoad || data.lastOnLoad < relativeEndTime) {
           data.lastOnLoad = relativeEndTime;
         }
